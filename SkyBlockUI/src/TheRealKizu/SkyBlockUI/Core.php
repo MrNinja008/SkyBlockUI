@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2019 Assassiner354
+ * Copyright 2019 TheRealKizu
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace Assassiner354\SkyBlockUI;
+namespace TheRealKizu\SkyBlockUI;
 
 use pocketmine\plugin\PluginBase;
 
@@ -25,8 +25,8 @@ use pocketmine\Server;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 
-use Assassiner354\SkyBlockUI\commands\SkyBlockUICommand;
-use Assassiner354\SkyBlockUI\functions\Functions;
+use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
+use TheRealKizu\SkyBlockUI\functions\Functions;
 
 class Core extends PluginBase {
 
@@ -40,8 +40,8 @@ class Core extends PluginBase {
 	    $this->registerCommands();
 
 		#DO NOT EDIT!
-		if($this->getDescription()->getAuthors()[0] !== "Assassiner354" || $this->getDescription()->getName() !== "SkyBlockUI"){
-			$this->getLogger()->notice("Fatal error! Illegal modification/use of SkyBlockUI by Assassiner354 (@RealA354)!");
+		if($this->getDescription()->getAuthors()[0] !== "TheRealKizu" || $this->getDescription()->getName() !== "SkyBlockUI"){
+			$this->getLogger()->notice("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (@TheRealKizu)!");
 			$this->getServer()->shutdown();
 		}
 	}

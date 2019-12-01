@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Assassiner354\SkyBlockUI\libs\jojoe77777\FormAPI;
+namespace TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI;
 
 class ModalForm extends Form {
 

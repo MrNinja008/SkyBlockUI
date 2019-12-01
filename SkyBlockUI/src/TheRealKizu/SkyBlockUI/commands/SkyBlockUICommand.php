@@ -1,22 +1,15 @@
 <?php
 
-namespace Assassiner354\SkyBlockUI\commands;
+namespace TheRealKizu\SkyBlockUI\commands;
 
-use Assassiner354\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
-use pocketmine\Player;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\command\utils\InvalidCommandSyntaxException;
-use pocketmine\entity\Entity;
-use pocketmine\network\mcpe\protocol\AddEntityPacket;
-use pocketmine\math\Vector3;
-use pocketmine\utils\TextFormat;
 
-use Assassiner354\SkyBlockUI\Core;
+use TheRealKizu\SkyBlockUI\Core;
 
 class SkyBlockUICommand extends PluginCommand {
 
-    /** @var Loader */
+    /** @var Core */
     private $main;
 
     public function __construct(Core $main) {

@@ -1,10 +1,11 @@
 name: SkyBlockUI
-main: Assassiner354\SkyBlockUI\Core
-version: 1.0.2
+main: TheRealKizu\SkyBlockUI\Core
+version: 1.0.3
 api: [3.0.0]
-author: Assassiner354
+author: TheRealKizu
 description: SkyBlockUI plugin for PocketMine-MP
 depend:
   - SkyBlock
-loadbefore:
-  - SkyBlock
+
+#Extra
+website: https://therealkizu.tk

@@ -1,14 +1,11 @@
 <?php
 
-namespace Assassiner354\SkyBlockUI\functions;
+namespace TheRealKizu\SkyBlockUI\functions;
 
 use pocketmine\Player;
-use pocketmine\Server;
-use pocketmine\command\{Command, CommandSender, ConsoleCommandSender};
-
-use Assassiner354\SkyBlockUI\Core;
-use Assassiner354\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
-use Assassiner354\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
+use TheRealKizu\SkyBlockUI\Core;
+use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
+use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
 
 class Functions {
 
