@@ -3,6 +3,7 @@
 namespace TheRealKizu\SkyBlockUI\functions;
 
 use pocketmine\Player;
+use pocketmine\Server;
 use TheRealKizu\SkyBlockUI\Core;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
@@ -145,6 +146,7 @@ class Functions {
 	public function memberAdd(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
             if($data !== null){
+                Server::getInstance()->dispatchCommand($p, "is invite" . $data);
             }
         });
         $form->setTitle("§lADD MEMBER");
@@ -156,6 +158,7 @@ class Functions {
 	public function memberRem(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
             if($data !== null){
+                Server::getInstance()->dispatchCommand($p, "is remove" . $data);
             }
         });
         $form->addLabel("Please write the IGN on the box.");
@@ -166,6 +169,7 @@ class Functions {
     public function inviteForm(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
             if($data !== null){
+                Server::getInstance()->dispatchCommand($p, "is invite" . $data);
             }
         });
         $form->addLabel("Please write the IGN on the box.");
@@ -176,8 +180,7 @@ class Functions {
     public function inviteMenu(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if ($result == null) {
-            }
+            if ($result == null) return;
             switch ($result) {
                 case 0:
                     break;
