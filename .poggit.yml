@@ -1,7 +1,6 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/TheRealKizu/SkyBlockUI
 branches:
 - master
-- rewrite
 projects:
   SkyBlockUI:
     path: SkyBlockUI/
