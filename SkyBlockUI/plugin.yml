@@ -1,6 +1,6 @@
 name: SkyBlockUI
-main: TheRealKizu\SkyBlockUI\Core
-version: 1.0.3
+main: TheRealKizu\SkyBlockUI\Loader
+version: 1.0.4
 api: [3.0.0]
 author: TheRealKizu
 description: SkyBlockUI plugin for PocketMine-MP
