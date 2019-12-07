@@ -1,20 +1,26 @@
 # SkyBlockUI
 ✅ Legit SkyBlockUI! Exclusively for PocketMine-MP!
 
-[![](https://poggit.pmmp.io/shield.state/SkyBlockUI)](https://poggit.pmmp.io/p/SkyBlockUI)
+[![HitCount](http://hits.dwyl.io/TheRealKizu/SkyBlockUI.svg)](http://hits.dwyl.io/TheRealKizu/SkyBlockUI)
 
-# Installation
+### Installation
 
-- To install the plugin download the .phar.
+- Download the latest or stable build.
 
-- Now place it in your plugins folder and start the server and stop it.
+- Place it in your `plugins` folder.
 
-- Start your server!
+- Restart your server.
 
-# Features
+### Features
 
 - [x] Island Creation
 - [x] Island Management
 - [x] Help
 - [x] Invite Management
 - [x] Member Management
+
+### Support
+
+Suggestions? Bugs? Need help? Join my server down below!
+
+<a href="https://discord.gg/Uey3p68"><img src="https://discordapp.com/api/guilds/638310885118574602/embed.png" alt="Discord Server"/></a>
