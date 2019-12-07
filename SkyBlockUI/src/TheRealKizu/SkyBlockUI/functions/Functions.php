@@ -4,7 +4,8 @@ namespace TheRealKizu\SkyBlockUI\functions;
 
 use pocketmine\Player;
 use pocketmine\Server;
-use TheRealKizu\SkyBlockUI\Core;
+use TheRealKizu\SkyBlockUI\Loader;
+
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
 
@@ -12,15 +13,14 @@ class Functions {
 
 	private $plugin;
 
-	public function __construct(Core $plugin){
+	public function __construct(Loader $plugin){
         $this->plugin = $plugin;
 	}
 
 	public function sbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if ($result == null) {
-            }
+            if (is_null($result)) return;
             switch ($result) {
                 case 0:
                     break;
@@ -55,8 +55,7 @@ class Functions {
     public function SBIsland(Player $sender) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if ($result == null) {
-            }
+            if (is_null($result)) return;
             switch ($result) {
                 case 0:
                     $this->sbUI($sender);
@@ -92,8 +91,7 @@ class Functions {
     public function SBManage(Player $sender) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if ($result == null) {
-            }
+            if (is_null($result)) return;
             switch ($result) {
                 case 0:
                     $this->sbUI($sender);
@@ -121,8 +119,7 @@ class Functions {
     public function memberManage(Player $sender) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if ($result == null) {
-            }
+            if (is_null($result)) return;
             switch ($result) {
                 case 0:
                     $this->sbUI($sender);

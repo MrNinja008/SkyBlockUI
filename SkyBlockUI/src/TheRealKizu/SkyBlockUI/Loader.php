@@ -20,15 +20,10 @@ namespace TheRealKizu\SkyBlockUI;
 
 use pocketmine\plugin\PluginBase;
 
-use pocketmine\Player;
-use pocketmine\Server;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-
 use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
 use TheRealKizu\SkyBlockUI\functions\Functions;
 
-class Core extends PluginBase {
+class Loader extends PluginBase {
 
     /**
      * @var Functions
@@ -36,17 +31,17 @@ class Core extends PluginBase {
     public $functions;
 
     public function onEnable() {
-	    $this->functions = new Functions($this);
-	    $this->registerCommands();
+        $this->functions = new Functions($this);
+        $this->registerCommands();
 
-		#DO NOT EDIT!
-		if($this->getDescription()->getAuthors()[0] !== "TheRealKizu" || $this->getDescription()->getName() !== "SkyBlockUI"){
-			$this->getLogger()->notice("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (@TheRealKizu)!");
-			$this->getServer()->shutdown();
-		}
-	}
+        #DO NOT EDIT!
+        if($this->getDescription()->getAuthors()[0] !== "TheRealKizu" || $this->getDescription()->getName() !== "SkyBlockUI"){
+            $this->getLogger()->notice("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (@TheRealKizu)!");
+            $this->getServer()->shutdown();
+        }
+    }
 
-	public function registerCommands() : void{
+    public function registerCommands() : void{
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);

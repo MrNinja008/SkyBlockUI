@@ -5,14 +5,14 @@ namespace TheRealKizu\SkyBlockUI\commands;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 
-use TheRealKizu\SkyBlockUI\Core;
+use TheRealKizu\SkyBlockUI\Loader;
 
 class SkyBlockUICommand extends PluginCommand {
 
-    /** @var Core */
+    /** @var Loader */
     private $main;
 
-    public function __construct(Core $main) {
+    public function __construct(Loader $main) {
         parent::__construct("skyblockui", $main);
         $this->main = $main;
         $this->setDescription("SkyBlockUI!");
