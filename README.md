@@ -19,6 +19,10 @@
 - [x] Invite Management
 - [x] Member Management
 
+### Dependencies
+
+- [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/2.3.3) by [GiantQuartz](https://github.com/GiantQuartz)
+
 ### Support
 
 Suggestions? Bugs? Need help? Join my server down below!
