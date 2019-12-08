@@ -25,6 +25,6 @@
 
 ### Support
 
-Suggestions? Bugs? Need help? Join my server down below!
+Suggestions? Bugs? Need help? Join my discord server down below!
 
 <a href="https://discord.gg/Uey3p68"><img src="https://discordapp.com/api/guilds/638310885118574602/embed.png" alt="Discord Server"/></a>
