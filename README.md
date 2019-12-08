@@ -5,7 +5,7 @@
 
 ### Installation
 
-- Download the latest or stable build.
+- Download the latest or stable build. Builds can be found [here](https://github.com/TheRealKizu/SkyBlockUI/releases)
 
 - Place it in your `plugins` folder.
 
