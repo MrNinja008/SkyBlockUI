@@ -142,9 +142,9 @@ class Functions {
 
 	public function memberAdd(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
-            if($data !== null){
-                Server::getInstance()->dispatchCommand($p, "is invite" . $data);
-            }
+            $result = $data[0];
+            if (is_null($result)) return;
+            Server::getInstance()->dispatchCommand($p, "is invite" . $data[0]);
         });
         $form->setTitle("§lADD MEMBER");
         $form->addLabel("Please write the IGN on the box.");
@@ -154,9 +154,9 @@ class Functions {
 
 	public function memberRem(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
-            if($data !== null){
-                Server::getInstance()->dispatchCommand($p, "is remove" . $data);
-            }
+            $result = $data[0];
+            if (is_null($result)) return;
+            Server::getInstance()->dispatchCommand($p, "is remove" . $data[0]);
         });
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "Steve");
@@ -165,9 +165,9 @@ class Functions {
 
     public function inviteForm(Player $player) {
         $form = new CustomForm(function (Player $p, $data){
-            if($data !== null){
-                Server::getInstance()->dispatchCommand($p, "is invite" . $data);
-            }
+            $result = $data[0];
+            if (is_null($result)) return;
+            Server::getInstance()->dispatchCommand($p, "is invite" . $data[0]);
         });
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "Steve");
