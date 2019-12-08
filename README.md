@@ -1,5 +1,5 @@
 # SkyBlockUI
-✅ Legit SkyBlockUI! Exclusively for PocketMine-MP!
+✅ Legit SkyBlockUI! Exclusively for PocketMine-MP and Altay!
 
 [![HitCount](http://hits.dwyl.io/TheRealKizu/SkyBlockUI.svg)](http://hits.dwyl.io/TheRealKizu/SkyBlockUI)
 
