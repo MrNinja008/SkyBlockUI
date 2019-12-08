@@ -4,6 +4,8 @@ namespace TheRealKizu\SkyBlockUI\commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\Player;
+use pocketmine\utils\TextFormat;
 
 use TheRealKizu\SkyBlockUI\Loader;
 
@@ -20,9 +22,14 @@ class SkyBlockUICommand extends PluginCommand {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
-        if(!$this->testPermission($sender)) {
+        if (!$this->testPermission($sender)) {
             return true;
         }
+
+        if (!$sender instanceof Player) {
+            $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
+        }
+
         $this->main->functions->sbUI($sender);
         return true;
     }
