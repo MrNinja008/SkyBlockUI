@@ -15,8 +15,8 @@ class SkyBlockUICommand extends PluginCommand {
     public function __construct(Loader $main) {
         parent::__construct("skyblockui", $main);
         $this->main = $main;
-        $this->setDescription("SkyBlockUI!");
-        $this->setAliases(["sbui"]);
+        $this->setDescription("Command for SkyBlockUI");
+        $this->setAliases(["sbui", "islandui", "isui"]);
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
