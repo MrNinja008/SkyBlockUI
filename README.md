@@ -6,9 +6,7 @@
 ### Installation
 
 - Download the latest or stable build. Builds can be found [here](https://github.com/TheRealKizu/SkyBlockUI/releases)
-
 - Place it in your `plugins` folder.
-
 - Restart your server.
 
 ### Features
@@ -21,6 +19,7 @@
 
 ### Dependencies
 
+- [FormAPI](https://poggit.pmmp.io/p/FormAPI) by [jojoe77777](https://github.com/jojoe77777) (Merged as of July 10, 2019)
 - [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/2.3.3) by [GiantQuartz](https://github.com/GiantQuartz)
 
 ### Support
