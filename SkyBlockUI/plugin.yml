@@ -6,6 +6,8 @@ author: TheRealKizu
 description: SkyBlockUI plugin for PocketMine-MP
 depend:
   - SkyBlock
+softdepend:
+  - RedSkyBlock
 
 #Extra
 website: https://therealkizu.tk
