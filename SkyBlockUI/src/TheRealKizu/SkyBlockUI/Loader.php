@@ -20,6 +20,7 @@ namespace TheRealKizu\SkyBlockUI;
 
 use pocketmine\plugin\PluginBase;
 
+use pocketmine\utils\Config;
 use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
 use TheRealKizu\SkyBlockUI\functions\Functions;
 
@@ -29,6 +30,15 @@ class Loader extends PluginBase {
      * @var Functions
      */
     public $functions;
+
+    /**
+     * @var Config
+     */
+    private $cfg;
+
+    public function onLoad() {
+        $this->cfg = new Config($this->getDataFolder() . "./config.yml", Config::YAML);
+    }
 
     public function onEnable() {
         $this->functions = new Functions($this);
