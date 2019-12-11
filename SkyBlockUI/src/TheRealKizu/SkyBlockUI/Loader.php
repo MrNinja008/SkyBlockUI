@@ -51,9 +51,11 @@ class Loader extends PluginBase {
         }
     }
 
-    public function registerCommands() : void{
-        $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
-            new SkyBlockUICommand($this),
-        ]);
+    public function registerCommands() : void {
+        if ($this->cfg->get("is-redskyblock") === "false") {
+            $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
+                new SkyBlockUICommand($this),
+            ]);
+        }
     }
 }
