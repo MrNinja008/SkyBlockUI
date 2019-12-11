@@ -17,6 +17,8 @@ class Functions {
         $this->plugin = $plugin;
 	}
 
+	// ---------- [SKYBLOCK] ----------
+
 	public function sbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
@@ -198,6 +200,22 @@ class Functions {
         $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 1);
         $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 2);
         $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 3);
+        $form->sendToPlayer($player);
+    }
+
+    // ---------- [REDSKYBLOCK] ----------
+    public function rsbUI(Player $player) {
+        $form = new SimpleForm(function (Player $sender, $data){
+            $result = $data;
+            if (is_null($result)) return;
+            switch ($result) {
+                case 0:
+                    break;
+            }
+        });
+        $form->setTitle("§lSKYBLOCK UI");
+        $form->setContent("§fSelect an option!");
+        $form->addButton("§cExit", 0);
         $form->sendToPlayer($player);
     }
 }
