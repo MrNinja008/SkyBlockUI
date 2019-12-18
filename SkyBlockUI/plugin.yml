@@ -4,8 +4,9 @@ version: 1.0.4
 api: [3.0.0]
 author: TheRealKizu
 description: SkyBlockUI plugin for PocketMine-MP
-depend:
+soft-depend:
   - SkyBlock
+  - RedSkyBlock
 
 #Extra
 website: https://therealkizu.tk
