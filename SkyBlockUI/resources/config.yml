@@ -1,0 +1,7 @@
+# Configuration file for SkyBlockUI
+# Made by TheRealKizu (https://github.com/TheRealKizu)
+
+# Options:
+# True - If you want to use RedSkyBlock.
+# False - If you want to use the Default SkyBlock plugin.
+is-redskyblock: false

@@ -11,14 +11,17 @@ abstract class Form implements IForm{
 
     /** @var array */
     protected $data = [];
+
     /** @var callable */
     private $callable;
+
     /**
      * @param callable $callable
      */
     public function __construct(?callable $callable) {
         $this->callable = $callable;
     }
+
     /**
      * @deprecated
      * @see Player::sendForm()
@@ -28,12 +31,15 @@ abstract class Form implements IForm{
     public function sendToPlayer(Player $player) : void {
         $player->sendForm($this);
     }
+
     public function getCallable() : ?callable {
         return $this->callable;
     }
+
     public function setCallable(?callable $callable) {
         $this->callable = $callable;
     }
+
     public function handleResponse(Player $player, $data) : void {
         $this->processData($data);
         $callable = $this->getCallable();
@@ -41,9 +47,12 @@ abstract class Form implements IForm{
             $callable($player, $data);
         }
     }
+
     public function processData(&$data) : void {
     }
+
     public function jsonSerialize(){
         return $this->data;
     }
+
 }
