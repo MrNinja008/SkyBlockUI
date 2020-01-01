@@ -7,6 +7,7 @@ namespace TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI;
 class ModalForm extends Form {
 
     private $labelMap = [];
+
     /**
      * @param callable|null $callable
      */
@@ -16,6 +17,7 @@ class ModalForm extends Form {
         $this->data["title"] = "";
         $this->data["content"] = [];
     }
+
     public function processData(&$data) : void {
         if(is_array($data)) {
             $new = [];
@@ -25,18 +27,21 @@ class ModalForm extends Form {
             $data = $new;
         }
     }
+
     /**
      * @param string $title
      */
     public function setTitle(string $title) : void {
         $this->data["title"] = $title;
     }
+
     /**
      * @return string
      */
     public function getTitle() : string {
         return $this->data["title"];
     }
+
     /**
      * @param string $text
      * @param string|null $label
@@ -45,6 +50,7 @@ class ModalForm extends Form {
         $this->addContent(["type" => "label", "text" => $text]);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param string $text
      * @param bool|null $default
@@ -58,6 +64,7 @@ class ModalForm extends Form {
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param string $text
      * @param int $min
@@ -77,6 +84,7 @@ class ModalForm extends Form {
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param string $text
      * @param array $steps
@@ -91,6 +99,7 @@ class ModalForm extends Form {
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param string $text
      * @param array $options
@@ -101,6 +110,7 @@ class ModalForm extends Form {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param string $text
      * @param string $placeholder
@@ -111,10 +121,12 @@ class ModalForm extends Form {
         $this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
+
     /**
      * @param array $content
      */
     private function addContent(array $content) : void {
         $this->data["content"][] = $content;
     }
+
 }
