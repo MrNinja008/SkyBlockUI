@@ -2,6 +2,6 @@
 # Made by TheRealKizu (https://github.com/TheRealKizu)
 
 # Options:
-# True - If you want to use RedSkyBlock.
-# False - If you want to use the Default SkyBlock plugin.
+# True - If you want to use RedSkyBlock by RedCraftGH.
+# False - If you want to use SkyBlock by GiantQuartz.
 is-redskyblock: false

@@ -60,7 +60,8 @@ class SkyBlockUICommand extends PluginCommand {
         if ($cfg->get("is-redskyblock") === "false") {
             $this->main->functions->sbUI($sender);
         } else if ($cfg->get("is-redskyblock") === "true"){
-            $sender->sendMessage(TextFormat::RED . "RedSkyBlock feature coming soon!");
+            $this->main->functions->rsbUI($sender);
+            //$sender->sendMessage(TextFormat::RED . "RedSkyBlock feature coming soon!");
         }
         return true;
     }
