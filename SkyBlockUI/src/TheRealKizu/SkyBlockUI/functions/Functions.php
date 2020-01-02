@@ -34,14 +34,14 @@ class Functions {
     /**
      * @var Loader
      */
-	private $plugin;
+    private $plugin;
 
-	public function __construct(Loader $plugin){
+    public function __construct(Loader $plugin){
         $this->plugin = $plugin;
-	}
+    }
 
-	// ---------- [SKYBLOCK] ----------
-	public function sbUI(Player $player) {
+    // ---------- [SKYBLOCK] ----------
+    public function sbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
             if ($result !== null) {
@@ -226,15 +226,16 @@ class Functions {
     public function rsbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if (is_null($result)) return;
-            switch ($result) {
-                case 0:
-                    break;
+            if ($result !== null) {
+                switch ($result) {
+                    case 0:
+                        break;
+                }
             }
         });
         $form->setTitle("§lSKYBLOCK UI");
         $form->setContent("§fSelect an option!");
-        $form->addButton("§cExit", 0);
+        $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $form->sendToPlayer($player);
     }
 }
