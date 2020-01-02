@@ -229,12 +229,16 @@ class Functions {
             if ($result !== null) {
                 switch ($result) {
                     case 0:
+                        $sender->sendMessage(TextFormat::RED . "Feature coming soon!");
+                        break;
+                    case 1:
                         break;
                 }
             }
         });
         $form->setTitle("§lSKYBLOCK UI");
         $form->setContent("§fSelect an option!");
+        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
