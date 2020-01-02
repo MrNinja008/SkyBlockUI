@@ -158,7 +158,7 @@ class Functions {
         $form->addButton("§cBack", 0);
         $form->addButton("§8Add Member\n§d§l»§r §8Tap to select!", 1);
         $form->addButton("§8Remove Member\n§d§l»§r §8Tap to select!", 2);
-        $form->sendToPlayer($sender);
+        $sender->sendForm($form);
     }
 
 	public function memberAdd(Player $player) {
@@ -170,7 +170,7 @@ class Functions {
         $form->setTitle("§lADD MEMBER");
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "Steve");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
 	}
 
 	public function memberRem(Player $player) {
@@ -181,7 +181,7 @@ class Functions {
         });
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "Steve");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
 	}
 
     public function inviteForm(Player $player) {
@@ -192,7 +192,7 @@ class Functions {
         });
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "Steve");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     public function inviteMenu(Player $player) {
@@ -219,7 +219,7 @@ class Functions {
         $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 1);
         $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 2);
         $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 3);
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 
     // ---------- [REDSKYBLOCK] ----------
@@ -236,6 +236,6 @@ class Functions {
         $form->setTitle("§lSKYBLOCK UI");
         $form->setContent("§fSelect an option!");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
-        $form->sendToPlayer($player);
+        $player->sendForm($form);
     }
 }
