@@ -171,7 +171,7 @@ class Functions {
     /**
      * @param Player $player
      */
-	public function invitePlayer(Player $player) {
+    public function invitePlayer(Player $player) {
         $form = new CustomForm(function (Player $sender, $data){
             $result = $data[0];
             if ($result !== null) {
@@ -182,12 +182,12 @@ class Functions {
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
-	}
+    }
 
     /**
      * @param Player $player
      */
-	public function memberRem(Player $player) {
+    public function memberRem(Player $player) {
         $form = new CustomForm(function (Player $sender, $data){
             $result = $data[0];
             if ($result !== null) {
@@ -197,7 +197,7 @@ class Functions {
         $form->addLabel("Please write the IGN on the box.");
         $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
-	}
+    }
 
     // ---------- [REDSKYBLOCK] ----------
 
