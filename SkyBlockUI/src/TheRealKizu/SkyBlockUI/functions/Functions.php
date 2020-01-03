@@ -22,9 +22,8 @@ declare(strict_types=1);
 namespace TheRealKizu\SkyBlockUI\functions;
 
 use pocketmine\Player;
-use pocketmine\Server;
-
 use pocketmine\utils\TextFormat;
+
 use TheRealKizu\SkyBlockUI\Loader;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
@@ -41,6 +40,10 @@ class Functions {
     }
 
     // ---------- [SKYBLOCK] ----------
+
+    /**
+     * @param Player $player
+     */
     public function sbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
@@ -53,17 +56,12 @@ class Functions {
                         $this->SBManage($sender);
                         break;
                     case 2:
-                        //$this->memberManage($sender);
-                        $sender->sendMessage(TextFormat::RED . "Feature is on rewritting...");
+                        $this->memberManage($sender);
                         break;
                     case 3:
-                        //$this->inviteMenu($sender);
-                        $sender->sendMessage(TextFormat::RED . "Feature is on rewritting...");
-                        break;
-                    case 4:
                         $sender->getServer()->dispatchCommand($sender, "is help");
                         break;
-                    case 5:
+                    case 4:
                         break;
                 }
             }
@@ -73,12 +71,14 @@ class Functions {
         $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/items/written_book");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
 
+    /**
+     * @param Player $player
+     */
     public function SBIsland(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
@@ -108,7 +108,10 @@ class Functions {
         $player->sendForm($form);
     }
 
-    public function SBManage(Player $sender) {
+    /**
+     * @param Player $player
+     */
+    public function SBManage(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
             if ($result !== null) {
@@ -134,95 +137,73 @@ class Functions {
         $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
-        $sender->sendForm($form);
+        $player->sendForm($form);
     }
 
-    public function memberManage(Player $sender) {
+    /**
+     * @param Player $player
+     */
+    public function memberManage(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;
-            if (is_null($result)) return;
-            switch ($result) {
-                case 0:
-                    $this->sbUI($sender);
-                    break;
-                case 1:
-                    $this->memberAdd($sender);
-                    break;
-                case 2:
-                    $this->memberRem($sender);
-                    break;
+            if ($result !== null) {
+                switch ($result) {
+                    case 0:
+                        $this->invitePlayer($sender);
+                        break;
+                    case 1:
+                        $this->memberRem($sender);
+                        break;
+                    case 2:
+                        $this->sbUI($sender);
+                        break;
+                }
             }
         });
         $form->setTitle("§lMEMBER MANAGEMENT");
         $form->setContent("§fManage your island members!");
-        $form->addButton("§cBack", 0);
-        $form->addButton("§8Add Member\n§d§l»§r §8Tap to select!", 1);
-        $form->addButton("§8Remove Member\n§d§l»§r §8Tap to select!", 2);
-        $sender->sendForm($form);
+        $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Remove Member\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§cBack", 0, "textures/blocks/barrier");
+        $player->sendForm($form);
     }
 
-	public function memberAdd(Player $player) {
-        $form = new CustomForm(function (Player $p, $data){
+    /**
+     * @param Player $player
+     */
+	public function invitePlayer(Player $player) {
+        $form = new CustomForm(function (Player $sender, $data){
             $result = $data[0];
-            if (is_null($result)) return;
-            Server::getInstance()->dispatchCommand($p, "is invite" . $data[0]);
+            if ($result !== null) {
+                $this->plugin->getServer()->dispatchCommand($sender, "is invite" . $result);
+            }
         });
         $form->setTitle("§lADD MEMBER");
         $form->addLabel("Please write the IGN on the box.");
-        $form->addInput("Player Name:", "Steve");
+        $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
 	}
 
+    /**
+     * @param Player $player
+     */
 	public function memberRem(Player $player) {
-        $form = new CustomForm(function (Player $p, $data){
+        $form = new CustomForm(function (Player $sender, $data){
             $result = $data[0];
-            if (is_null($result)) return;
-            Server::getInstance()->dispatchCommand($p, "is remove" . $data[0]);
-        });
-        $form->addLabel("Please write the IGN on the box.");
-        $form->addInput("Player Name:", "Steve");
-        $player->sendForm($form);
-	}
-
-    public function inviteForm(Player $player) {
-        $form = new CustomForm(function (Player $p, $data){
-            $result = $data[0];
-            if (is_null($result)) return;
-            Server::getInstance()->dispatchCommand($p, "is invite" . $data[0]);
-        });
-        $form->addLabel("Please write the IGN on the box.");
-        $form->addInput("Player Name:", "Steve");
-        $player->sendForm($form);
-    }
-
-    public function inviteMenu(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
-            $result = $data;
-            if ($result == null) return;
-            switch ($result) {
-                case 0:
-                    break;
-                case 1:
-                    $sender->getServer()->dispatchCommand($sender, "is accept");
-                    break;
-                case 2:
-                    $sender->getServer()->dispatchCommand($sender, "is deny");
-                    break;
-                case 3:
-                    $this->inviteForm($sender);
-                    break;
+            if ($result !== null) {
+                $this->plugin->getServer()->dispatchCommand($sender, "is invite" . $result);
             }
         });
-        $form->setTitle("§lINVITE MENU");
-        $form->setContent("§fSelect an option!");
-        $form->addButton("§cBack", 0);
-        $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 1);
-        $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 2);
-        $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 3);
+        $form->addLabel("Please write the IGN on the box.");
+        $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
-    }
+	}
 
     // ---------- [REDSKYBLOCK] ----------
+
+    /**
+     * @param Player $player
+     */
     public function rsbUI(Player $player) {
         $form = new SimpleForm(function (Player $sender, $data){
             $result = $data;

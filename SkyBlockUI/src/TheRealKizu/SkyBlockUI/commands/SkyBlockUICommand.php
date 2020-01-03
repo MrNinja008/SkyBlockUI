@@ -32,11 +32,11 @@ use TheRealKizu\SkyBlockUI\Loader;
 class SkyBlockUICommand extends PluginCommand {
 
     /** @var Loader */
-    private $main;
+    private $plugin;
 
-    public function __construct(Loader $main) {
-        parent::__construct("skyblockui", $main);
-        $this->main = $main;
+    public function __construct(Loader $plugin) {
+        parent::__construct("skyblockui", $plugin);
+        $this->plugin = $plugin;
         $this->setDescription("Command for SkyBlockUI");
         $this->setAliases(["sbui", "islandui", "isui"]);
     }
@@ -52,16 +52,15 @@ class SkyBlockUICommand extends PluginCommand {
             return true;
         }
 
-        if (!$sender instanceof Player) {
+        if ($sender instanceof Player) {
+            $cfg = new Config($this->plugin->getDataFolder() . "config.yml", Config::YAML);
+            if ($cfg->get("is-redskyblock") === "false") {
+                $this->plugin->functions->sbUI($sender);
+            } else if ($cfg->get("is-redskyblock") === "true"){
+                $this->plugin->functions->rsbUI($sender);
+            }
+        } else {
             $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
-        }
-
-        $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
-        if ($cfg->get("is-redskyblock") === "false") {
-            $this->main->functions->sbUI($sender);
-        } else if ($cfg->get("is-redskyblock") === "true"){
-            $this->main->functions->rsbUI($sender);
-            //$sender->sendMessage(TextFormat::RED . "RedSkyBlock feature coming soon!");
         }
         return true;
     }

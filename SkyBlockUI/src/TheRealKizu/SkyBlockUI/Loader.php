@@ -34,22 +34,20 @@ class Loader extends PluginBase {
      */
     public $functions;
 
-
     public function onLoad() {
         $this->getLogger()->notice("SkyBlockUI is initializing...");
+        $this->saveCfg();
     }
 
     public function onEnable() {
         $this->functions = new Functions($this);
-        $this->checkDepends(); //This line will check dependencies.
+        $this->checkDepends();
         $this->registerCommands();
-        $this->saveDefaultConfig();
-        $this->saveResource("config.yml");
         $this->getLogger()->notice("SkyBlockUI has been initialized! Made with love by TheRealKizu.");
 
         //DO NOT EDIT!
         if ($this->getDescription()->getAuthors()[0] !== "TheRealKizu" || $this->getDescription()->getName() !== "SkyBlockUI"){
-            $this->getLogger()->emergency("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (TheRealKizu#3267 or @TheRealKizu)!");
+            $this->getLogger()->error("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (TheRealKizu#3267 or @TheRealKizu)!");
             $this->getServer()->shutdown();
         }
 
@@ -79,15 +77,21 @@ class Loader extends PluginBase {
         $sb = $this->getServer()->getPluginManager()->getPlugin("SkyBlock");
         $redsb = $this->getServer()->getPluginManager()->getPlugin("RedSkyBlock");
         if (is_null($sb)) {
-            $this->getLogger()->emergency("Fatal error! SkyBlock plugin not found!");
+            $this->getLogger()->error("Fatal error! SkyBlock plugin not found!");
             $this->getServer()->shutdown();
         }
 
         if ($cfg->get("is-redskyblock") === "true") {
             if (is_null($redsb)) {
-                $this->getLogger()->emergency("Fatal error! RedSkyBlock plugin not found!");
+                $this->getLogger()->error("Fatal error! RedSkyBlock plugin not found!");
                 $this->getServer()->shutdown();
             }
         }
+    }
+
+    public function saveCfg() {
+        @mkdir($this->getDataFolder());
+        $this->saveDefaultConfig();
+        $this->saveResource("config.yml");
     }
 }
