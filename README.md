@@ -11,10 +11,9 @@
 
 ### Features
 
+- [x] Help
 - [x] Island Creation
 - [x] Island Management
-- [x] Help
-- [x] Invite Management
 - [x] Member Management
 
 ### Dependencies
