@@ -2,7 +2,7 @@
 
 /**
 *                  SkyBlockUI
- * Copyright (C) 2020 TheRealKizu
+ * Copyright (C) 2019-2020 TheRealKizu
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace TheRealKizu\SkyBlockUI;
 
 use pocketmine\plugin\PluginBase;
-
 use pocketmine\utils\Config;
 use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
 use TheRealKizu\SkyBlockUI\functions\Functions;
@@ -59,7 +58,7 @@ class Loader extends PluginBase {
             $this->getServer()->shutdown();
         }
 
-        //Just a logger.
+        //Just a config check.
         if ($this->config->get("is-redskyblock") === "true") {
             $this->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
         }

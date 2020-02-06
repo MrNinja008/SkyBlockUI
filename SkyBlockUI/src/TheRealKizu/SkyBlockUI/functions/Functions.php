@@ -2,7 +2,7 @@
 
 /**
  *                  SkyBlockUI
- * Copyright (C) 2020 TheRealKizu
+ * Copyright (C) 2019-2020 TheRealKizu
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,10 +23,9 @@ namespace TheRealKizu\SkyBlockUI\functions;
 
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
-
-use TheRealKizu\SkyBlockUI\Loader;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
+use TheRealKizu\SkyBlockUI\Loader;
 
 class Functions {
 
