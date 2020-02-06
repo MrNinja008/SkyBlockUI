@@ -218,7 +218,7 @@ class Functions {
         });
         $form->setTitle("§lSKYBLOCK UI");
         $form->setContent("§fSelect an option!");
-        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
