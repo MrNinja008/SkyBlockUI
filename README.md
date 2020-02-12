@@ -1,8 +1,6 @@
 # SkyBlockUI
 ✅ Legit SkyBlockUI! Exclusively for PocketMine-MP and Altay!
 
-[![HitCount](http://hits.dwyl.io/TheRealKizu/SkyBlockUI.svg)](http://hits.dwyl.io/TheRealKizu/SkyBlockUI)
-
 ### Installation
 
 - Download the latest or stable build. Builds can be found [here](https://github.com/TheRealKizu/SkyBlockUI/releases)
@@ -26,4 +24,4 @@
 
 Suggestions? Bugs? Need help? Join my discord server down below!
 
-<a href="https://discord.gg/hWt3XxF"><img src="https://discordapp.com/api/guilds/602329130977067019/embed.png" alt="Discord Server"/></a>
+<a href="https://discord.gg/SdjhdXp"><img src="https://discordapp.com/api/guilds/602329130977067019/embed.png" alt="Discord Server"/></a>
