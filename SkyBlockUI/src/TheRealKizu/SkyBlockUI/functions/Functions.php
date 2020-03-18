@@ -151,7 +151,7 @@ class Functions {
                         $this->invitePlayer($sender);
                         break;
                     case 1:
-                        $this->memberRem($sender);
+                        $this->memberBan($sender);
                         break;
                     case 2:
                         $this->sbUI($sender);
@@ -186,11 +186,11 @@ class Functions {
     /**
      * @param Player $player
      */
-    public function memberRem(Player $player) {
+    public function memberBan(Player $player) {
         $form = new CustomForm(function (Player $sender, $data){
             $result = $data[0];
             if ($result !== null) {
-                $this->plugin->getServer()->dispatchCommand($sender, "is invite" . $result);
+                $this->plugin->getServer()->dispatchCommand($sender, "is banish" . $result);
             }
         });
         $form->addLabel("Please write the IGN on the box.");
