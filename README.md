@@ -13,6 +13,7 @@
 - [x] Island Creation
 - [x] Island Management
 - [x] Member Management
+- [x] [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/2.3.3) and [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) Support
 
 ### Dependencies
 
