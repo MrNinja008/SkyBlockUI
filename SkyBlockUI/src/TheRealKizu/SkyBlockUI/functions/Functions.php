@@ -21,8 +21,11 @@ declare(strict_types=1);
 
 namespace TheRealKizu\SkyBlockUI\functions;
 
+use GiantQuartz\SkyBlock\island\IslandFactory;
+use GiantQuartz\SkyBlock\session\SessionLocator;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
+use ReflectionException;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
 use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
 use TheRealKizu\SkyBlockUI\Loader;
@@ -42,23 +45,34 @@ class Functions {
 
     /**
      * @param Player $player
+     * @throws ReflectionException
      */
     public function sbUI(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
+        $session = SessionLocator::getSession($player);
+        $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 0:
-                        $this->SBIsland($sender);
+                        //$this->SBIsland($sender);
+                        if (!$session->hasIsland()) {
+                            $this->SBIsland($player);
+                        } else {
+                            $player->sendMessage(TextFormat::RED . "You already have an island");
+                        }
                         break;
                     case 1:
-                        $this->SBManage($sender);
+                        if ($session->hasIsland()) {
+                            $this->SBManage($player);
+                        } else {
+                            $player->sendMessage(TextFormat::RED . "You don't have an island");
+                        }
                         break;
                     case 2:
-                        $this->memberManage($sender);
+                        $this->memberManage($player);
                         break;
                     case 3:
-                        $sender->getServer()->dispatchCommand($sender, "is help");
+                        $player->getServer()->dispatchCommand($player, "is help");
                         break;
                     case 4:
                         break;
@@ -77,23 +91,28 @@ class Functions {
 
     /**
      * @param Player $player
+     * @throws ReflectionException
      */
     public function SBIsland(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
+        $session = SessionLocator::getSession($player);
+        $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 1:
-                        $sender->getServer()->dispatchCommand($sender, "is create Basic");
+                        //$sender->getServer()->dispatchCommand($sender, "is create Basic");
+                        IslandFactory::createIslandFor($session->getPlayer(), "Basic");
                         break;
                     case 2:
-                        $sender->getServer()->dispatchCommand($sender, "is create Palm");
+                        //$player->getServer()->dispatchCommand($player, "is create Palm");
+                        IslandFactory::createIslandFor($session->getPlayer(), "Palm");
                         break;
                     case 3:
-                        $sender->getServer()->dispatchCommand($sender, "is create");
+                        //$player->getServer()->dispatchCommand($player, "is create");
+                        IslandFactory::createIslandFor($session->getPlayer(), "");
                         break;
                     case 4:
-                        $this->sbUI($sender);
+                        $this->sbUI($player);
                         break;
                 }
             }
@@ -111,21 +130,21 @@ class Functions {
      * @param Player $player
      */
     public function SBManage(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
+        $form = new SimpleForm(function (Player $player, $data){
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 0:
-                        $sender->getServer()->dispatchCommand($sender, "is join");
+                        $player->getServer()->dispatchCommand($player, "is join");
                         break;
                     case 1:
-                        $sender->getServer()->dispatchCommand($sender, "is disband");
+                        $player->getServer()->dispatchCommand($player, "is disband");
                         break;
                     case 2:
-                        $sender->getServer()->dispatchCommand($sender, "is lock");
+                        $player->getServer()->dispatchCommand($player, "is lock");
                         break;
                     case 3:
-                        $this->sbUI($sender);
+                        $this->sbUI($player);
                         break;
                 }
             }
@@ -143,18 +162,18 @@ class Functions {
      * @param Player $player
      */
     public function memberManage(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
+        $form = new SimpleForm(function (Player $player, $data){
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 0:
-                        $this->invitePlayer($sender);
+                        $this->invitePlayer($player);
                         break;
                     case 1:
-                        $this->memberBan($sender);
+                        $this->memberBan($player);
                         break;
                     case 2:
-                        $this->sbUI($sender);
+                        $this->sbUI($player);
                         break;
                 }
             }
@@ -171,10 +190,10 @@ class Functions {
      * @param Player $player
      */
     public function invitePlayer(Player $player) {
-        $form = new CustomForm(function (Player $sender, $data){
+        $form = new CustomForm(function (Player $player, $data){
             $result = $data[0];
             if ($result !== null) {
-                $this->plugin->getServer()->dispatchCommand($sender, "is invite" . $result);
+                $this->plugin->getServer()->dispatchCommand($player, "is invite" . $result);
             }
         });
         $form->setTitle("§lADD MEMBER");
@@ -187,10 +206,10 @@ class Functions {
      * @param Player $player
      */
     public function memberBan(Player $player) {
-        $form = new CustomForm(function (Player $sender, $data){
+        $form = new CustomForm(function (Player $player, $data){
             $result = $data[0];
             if ($result !== null) {
-                $this->plugin->getServer()->dispatchCommand($sender, "is banish" . $result);
+                $this->plugin->getServer()->dispatchCommand($player, "is banish" . $result);
             }
         });
         $form->addLabel("Please write the IGN on the box.");
@@ -204,12 +223,12 @@ class Functions {
      * @param Player $player
      */
     public function rsbUI(Player $player) {
-        $form = new SimpleForm(function (Player $sender, $data){
+        $form = new SimpleForm(function (Player $player, $data){
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 0:
-                        $sender->sendMessage(TextFormat::RED . "Feature coming soon!");
+                        $player->sendMessage(TextFormat::RED . "Feature coming soon!");
                         break;
                     case 1:
                         break;

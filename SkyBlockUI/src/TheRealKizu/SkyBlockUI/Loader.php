@@ -23,11 +23,18 @@ namespace TheRealKizu\SkyBlockUI;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-
 use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
 use TheRealKizu\SkyBlockUI\functions\Functions;
 
 class Loader extends PluginBase {
+
+    /**
+     * @var int
+     * Legend:
+     * 0 = In Development
+     * 1 = Ready for production
+     */
+    public $inDev = 1;
 
     /**
      * @var Functions
@@ -48,24 +55,17 @@ class Loader extends PluginBase {
 
     public function onEnable() {
         $this->functions = new Functions($this);
-        $this->config = $this->getConfig()->getAll();
-        $this->checkDepends();
         $this->registerCommands();
         $this->getLogger()->notice("SkyBlockUI has been initialized! Made with love by TheRealKizu.");
 
-        //DO NOT EDIT!
-        if ($this->getDescription()->getAuthors()[0] !== ["TheRealKizu"] || $this->getDescription()->getName() !== "SkyBlockUI"){
-            $this->getLogger()->error("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (TheRealKizu#3267 or @TheRealKizu)!");
-            $this->getServer()->shutdown();
-        }
 
         //Just a config check.
-        if ($this->config->get("is-redskyblock") === "true") {
-            $this->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
-        }
-
-        if ($this->config->get("is-redskyblock") === "false") {
-            $this->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
+        if ($this->inDev = 1) {
+            if ($this->getConfig()->get("is-redskyblock") === ["true" || true]) {
+                $this->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
+            } else if ($this->getConfig()->get("is-redskyblock") === ["false" || false]) {
+                $this->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
+            }
         }
     }
 
@@ -79,19 +79,4 @@ class Loader extends PluginBase {
         ]);
     }
 
-    public function checkDepends() {
-        $sb = $this->getServer()->getPluginManager()->getPlugin("SkyBlock");
-        $redsb = $this->getServer()->getPluginManager()->getPlugin("RedSkyBlock");
-        if (is_null($sb)) {
-            $this->getLogger()->error("Fatal error! SkyBlock plugin not found!");
-            $this->getServer()->shutdown();
-        }
-
-        if ($this->config->get("is-redskyblock") === "true") {
-            if (is_null($redsb)) {
-                $this->getLogger()->error("Fatal error! RedSkyBlock plugin not found!");
-                $this->getServer()->shutdown();
-            }
-        }
-    }
 }
