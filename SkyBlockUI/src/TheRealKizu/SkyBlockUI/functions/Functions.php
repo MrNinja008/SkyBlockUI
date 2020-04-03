@@ -101,15 +101,15 @@ class Functions {
                 switch ($result) {
                     case 1:
                         //$sender->getServer()->dispatchCommand($sender, "is create Basic");
-                        IslandFactory::createIslandFor($session->getPlayer(), "Basic");
+                        IslandFactory::createIslandFor($session, "Basic");
                         break;
                     case 2:
                         //$player->getServer()->dispatchCommand($player, "is create Palm");
-                        IslandFactory::createIslandFor($session->getPlayer(), "Palm");
+                        IslandFactory::createIslandFor($session, "Palm");
                         break;
                     case 3:
                         //$player->getServer()->dispatchCommand($player, "is create");
-                        IslandFactory::createIslandFor($session->getPlayer(), "");
+                        IslandFactory::createIslandFor($session, "");
                         break;
                     case 4:
                         $this->sbUI($player);

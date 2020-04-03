@@ -61,9 +61,9 @@ class Loader extends PluginBase {
 
         //Just a config check.
         if ($this->inDev = 1) {
-            if ($this->getConfig()->get("is-redskyblock") === ["true" || true]) {
+            if ($this->getConfig()->get("is-redskyblock") === "true") {
                 $this->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
-            } else if ($this->getConfig()->get("is-redskyblock") === ["false" || false]) {
+            } else if ($this->getConfig()->get("is-redskyblock") === "false") {
                 $this->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
             }
         }
