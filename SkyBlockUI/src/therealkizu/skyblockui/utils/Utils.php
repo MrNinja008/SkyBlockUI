@@ -66,8 +66,9 @@ class Utils {
         } else {
             $this->plugin->getLogger()->error("SkyBlockUI is not ready for production! Get the latest release on the GitHub page!");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
-            return true;
         }
+
+        return false;
     }
 
 }
