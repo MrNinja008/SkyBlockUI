@@ -28,15 +28,6 @@ use therealkizu\skyblockui\utils\Utils;
 
 class Loader extends PluginBase {
 
-    /**
-     * Legend:
-     * 0 = In Development
-     * 1 = Ready for production
-     *
-     * @var int $inDev
-     */
-    public $inDev = 1;
-
     /** @var Functions $functions */
     public $functions;
 
