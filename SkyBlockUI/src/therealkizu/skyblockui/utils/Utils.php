@@ -48,4 +48,26 @@ class Utils {
         return false;
     }
 
+    /**
+     *
+     * Check what SkyBlock plugin is the server using.
+     *
+     * @return bool
+     */
+    public function checkSkyBlockPlugin() : bool {
+        if ($this->plugin->inDev = 1) {
+            if ($this->plugin->getConfig()->get("is-redskyblock") === "true") {
+                $this->plugin->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
+            } else if ($this->plugin->getConfig()->get("is-redskyblock") === "false") {
+                $this->plugin->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
+            }
+
+            return true;
+        } else {
+            $this->plugin->getLogger()->error("SkyBlockUI is not ready for production! Get the latest release on the GitHub page!");
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
+            return true;
+        }
+    }
+
 }

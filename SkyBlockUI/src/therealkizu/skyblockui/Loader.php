@@ -24,6 +24,7 @@ namespace therealkizu\skyblockui;
 use pocketmine\plugin\PluginBase;
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
 use therealkizu\skyblockui\functions\Functions;
+use therealkizu\skyblockui\utils\Utils;
 
 class Loader extends PluginBase {
 
@@ -39,6 +40,9 @@ class Loader extends PluginBase {
     /** @var Functions $functions */
     public $functions;
 
+    /** @var Utils $utils */
+    public $utils;
+
     public function onLoad() {
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
@@ -47,16 +51,10 @@ class Loader extends PluginBase {
 
     public function onEnable() {
         $this->functions = new Functions($this);
+        $this->utils = new Utils($this);
         $this->registerCommands();
-
-        //Just a config check.
-        if ($this->inDev = 1) {
-            if ($this->getConfig()->get("is-redskyblock") === "true") {
-                $this->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
-            } else if ($this->getConfig()->get("is-redskyblock") === "false") {
-                $this->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
-            }
-        }
+        $this->utils->isSpoon();
+        $this->utils->checkSkyBlockPlugin();
     }
 
     public function registerCommands() {
