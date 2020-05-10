@@ -2,6 +2,7 @@
 branches:
 - master
 - redsb
+- rewrite
 projects:
   SkyBlockUI:
     path: SkyBlockUI/
