@@ -21,11 +21,12 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\functions;
 
-use GiantQuartz\SkyBlock\island\IslandFactory;
-use GiantQuartz\SkyBlock\session\SessionLocator;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use ReflectionException;
+
+use room17\SkyBlock\island\IslandFactory;
+use room17\SkyBlock\SkyBlock;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
 use therealkizu\skyblockui\Loader;
@@ -48,35 +49,35 @@ class Functions {
      * @throws ReflectionException
      */
     public function sbUI(Player $player) {
-        $session = SessionLocator::getSession($player);
+        $skyblock = SkyBlock::getInstance();
+        $session = $skyblock->getSessionManager()->getSession($player);
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result !== null) {
-                switch ($result) {
-                    case 0:
-                        //$this->SBIsland($sender);
-                        if (!$session->hasIsland()) {
-                            $this->SBIsland($player);
-                        } else {
-                            $player->sendMessage(TextFormat::RED . "You already have an island");
-                        }
-                        break;
-                    case 1:
-                        if ($session->hasIsland()) {
-                            $this->SBManage($player);
-                        } else {
-                            $player->sendMessage(TextFormat::RED . "You don't have an island");
-                        }
-                        break;
-                    case 2:
-                        $this->memberManage($player);
-                        break;
-                    case 3:
-                        $player->getServer()->dispatchCommand($player, "is help");
-                        break;
-                    case 4:
-                        break;
-                }
+            if (is_null($result)) return;
+
+            switch ($result) {
+                case 0:
+                    if (!$session->hasIsland()) {
+                        $this->SBIsland($player);
+                    } else {
+                        $player->sendMessage(TextFormat::RED . "You already have an island");
+                    }
+                    break;
+                case 1:
+                    if ($session->hasIsland()) {
+                        $this->SBManage($player);
+                    } else {
+                        $player->sendMessage(TextFormat::RED . "You don't have an island");
+                    }
+                    break;
+                case 2:
+                    $this->memberManage($player);
+                    break;
+                case 3:
+                    $player->getServer()->dispatchCommand($player, "is help");
+                    break;
+                case 4:
+                    break;
             }
         });
         $form->setTitle("§lSKYBLOCK UI");
@@ -94,21 +95,19 @@ class Functions {
      * @throws ReflectionException
      */
     public function SBIsland(Player $player) {
-        $session = SessionLocator::getSession($player);
+        $skyblock = SkyBlock::getInstance();
+        $session = $skyblock->getSessionManager()->getSession($player);
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
                     case 1:
-                        //$sender->getServer()->dispatchCommand($sender, "is create Basic");
                         IslandFactory::createIslandFor($session, "Basic");
                         break;
                     case 2:
-                        //$player->getServer()->dispatchCommand($player, "is create Palm");
                         IslandFactory::createIslandFor($session, "Palm");
                         break;
                     case 3:
-                        //$player->getServer()->dispatchCommand($player, "is create");
                         IslandFactory::createIslandFor($session, "");
                         break;
                     case 4:
@@ -130,7 +129,7 @@ class Functions {
      * @param Player $player
      */
     public function SBManage(Player $player) {
-        $form = new SimpleForm(function (Player $player, $data){
+        $form = new SimpleForm(function (Player $player, $data) {
             $result = $data;
             if ($result !== null) {
                 switch ($result) {

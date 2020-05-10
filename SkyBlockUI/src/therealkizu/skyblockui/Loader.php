@@ -52,6 +52,7 @@ class Loader extends PluginBase {
     public function onEnable() {
         $this->functions = new Functions($this);
         $this->utils = new Utils($this);
+
         $this->registerCommands();
         $this->utils->isSpoon();
         $this->utils->checkSkyBlockPlugin();
