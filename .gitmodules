@@ -1,4 +1,0 @@
-[submodule "SkyBlockUI/src/TheRealKizu/SkyBlockUI/libs/SkyBlock"]
-	path = SkyBlockUI/src/TheRealKizu/SkyBlockUI/libs/SkyBlock
-	url = https://github.com/GiantQuartz/SkyBlock
-	branch = stable
