@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI;
+namespace therealkizu\skyblockui\libs\jojoe77777\FormAPI;
 
-class ModalForm extends Form {
+class CustomForm extends Form {
 
     private $labelMap = [];
 

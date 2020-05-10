@@ -19,14 +19,14 @@
 
 declare(strict_types=1);
 
-namespace TheRealKizu\SkyBlockUI\commands;
+namespace therealkizu\skyblockui\commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
-use TheRealKizu\SkyBlockUI\Loader;
+use therealkizu\skyblockui\Loader;
 
 class SkyBlockUICommand extends PluginCommand {
 

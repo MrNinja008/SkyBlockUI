@@ -19,16 +19,16 @@
 
 declare(strict_types=1);
 
-namespace TheRealKizu\SkyBlockUI\functions;
+namespace therealkizu\skyblockui\functions;
 
 use GiantQuartz\SkyBlock\island\IslandFactory;
 use GiantQuartz\SkyBlock\session\SessionLocator;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use ReflectionException;
-use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\CustomForm;
-use TheRealKizu\SkyBlockUI\libs\jojoe77777\FormAPI\SimpleForm;
-use TheRealKizu\SkyBlockUI\Loader;
+use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
+use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
+use therealkizu\skyblockui\Loader;
 
 class Functions {
 

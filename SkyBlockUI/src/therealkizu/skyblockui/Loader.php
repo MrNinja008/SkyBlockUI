@@ -19,35 +19,27 @@
 
 declare(strict_types=1);
 
-namespace TheRealKizu\SkyBlockUI;
+namespace therealkizu\skyblockui;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
-use TheRealKizu\SkyBlockUI\commands\SkyBlockUICommand;
-use TheRealKizu\SkyBlockUI\functions\Functions;
+use therealkizu\skyblockui\commands\SkyBlockUICommand;
+use therealkizu\skyblockui\functions\Functions;
 
 class Loader extends PluginBase {
 
     /**
-     * @var int
      * Legend:
      * 0 = In Development
      * 1 = Ready for production
+     *
+     * @var int $inDev
      */
     public $inDev = 1;
 
-    /**
-     * @var Functions
-     */
+    /** @var Functions $functions */
     public $functions;
 
-    /**
-     * @var Config
-     */
-    public $config;
-
     public function onLoad() {
-        $this->getLogger()->notice("SkyBlockUI is initializing...");
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->saveResource("config.yml");
@@ -56,8 +48,6 @@ class Loader extends PluginBase {
     public function onEnable() {
         $this->functions = new Functions($this);
         $this->registerCommands();
-        $this->getLogger()->notice("SkyBlockUI has been initialized! Made with love by TheRealKizu.");
-
 
         //Just a config check.
         if ($this->inDev = 1) {
@@ -67,10 +57,6 @@ class Loader extends PluginBase {
                 $this->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
             }
         }
-    }
-
-    public function onDisable() {
-        $this->getLogger()->notice("SkyBlockUI disabled!");
     }
 
     public function registerCommands() {
