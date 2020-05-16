@@ -101,16 +101,16 @@ class Functions {
             $result = $data;
             if ($result !== null) {
                 switch ($result) {
-                    case 1:
+                    case 0:
                         IslandFactory::createIslandFor($session, "Basic");
                         break;
-                    case 2:
+                    case 1:
                         IslandFactory::createIslandFor($session, "Palm");
                         break;
-                    case 3:
+                    case 2:
                         IslandFactory::createIslandFor($session, "");
                         break;
-                    case 4:
+                    case 3:
                         $this->sbUI($player);
                         break;
                 }
