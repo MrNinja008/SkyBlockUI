@@ -21,22 +21,25 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\commands;
 
+use pocketmine\Player;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
+
+use room17\SkyBlock\SkyBlock;
+
 use therealkizu\skyblockui\Loader;
 
 class SkyBlockUICommand extends PluginCommand {
 
-    /** @var Loader */
+    /** @var Loader $plugin */
     private $plugin;
 
     public function __construct(Loader $plugin) {
         parent::__construct("skyblockui", $plugin);
         $this->plugin = $plugin;
-        $this->setDescription("Command for SkyBlockUI");
+        $this->setDescription("Manage your island using an UI!");
         $this->setAliases(["sbui", "islandui", "isui"]);
     }
 
@@ -53,8 +56,10 @@ class SkyBlockUICommand extends PluginCommand {
 
         if ($sender instanceof Player) {
             $cfg = new Config($this->plugin->getDataFolder() . "config.yml", Config::YAML);
+
+            $session = SkyBlock::getInstance()->getSessionManager()->getSession($sender);
             if ($cfg->get("is-redskyblock") === "false") {
-                $this->plugin->functions->sbUI($sender);
+                $this->plugin->functions->sbUI($sender, $session);
             } else if ($cfg->get("is-redskyblock") === "true"){
                 $this->plugin->functions->rsbUI($sender);
             }
@@ -63,4 +68,5 @@ class SkyBlockUICommand extends PluginCommand {
         }
         return true;
     }
+
 }

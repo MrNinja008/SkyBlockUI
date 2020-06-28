@@ -28,7 +28,7 @@ abstract class Form implements IForm{
      *
      * @param Player $player
      */
-    public function sendToPlayer(Player $player) : void {
+    public function sendToPlayer(Player $player): void {
         $player->sendForm($this);
     }
 
@@ -40,7 +40,7 @@ abstract class Form implements IForm{
         $this->callable = $callable;
     }
 
-    public function handleResponse(Player $player, $data) : void {
+    public function handleResponse(Player $player, $data): void {
         $this->processData($data);
         $callable = $this->getCallable();
         if($callable !== null) {
@@ -48,7 +48,7 @@ abstract class Form implements IForm{
         }
     }
 
-    public function processData(&$data) : void {
+    public function processData(&$data): void {
     }
 
     public function jsonSerialize(){

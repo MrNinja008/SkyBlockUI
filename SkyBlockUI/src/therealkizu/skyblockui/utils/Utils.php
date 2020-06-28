@@ -33,12 +33,11 @@ class Utils {
     }
 
     /**
-     *
      * Check if server is not using PocketMine-MP.
      *
      * @return bool
      */
-    public function isSpoon() : bool {
+    public function isSpoon(): bool {
         if ($this->plugin->getServer()->getName() !== "PocketMine-MP") {
             $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP. Disabling plugin...");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
@@ -49,12 +48,11 @@ class Utils {
     }
 
     /**
-     *
      * Check what SkyBlock plugin is the server using.
      *
      * @return void
      */
-    public function checkSkyBlockPlugin() {
+    public function checkSkyBlockPlugin(): void {
         if ($this->plugin->getConfig()->get("is-redskyblock") === "true") {
             $this->plugin->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
         } else if ($this->plugin->getConfig()->get("is-redskyblock") === "false") {

@@ -24,14 +24,14 @@ class SimpleForm extends Form {
         $this->data["content"] = $this->content;
     }
 
-    public function processData(&$data) : void {
+    public function processData(&$data): void {
         $data = $this->labelMap[$data] ?? null;
     }
 
     /**
      * @param string $title
      */
-    public function setTitle(string $title) : void {
+    public function setTitle(string $title): void {
         $this->data["title"] = $title;
     }
 
@@ -52,7 +52,7 @@ class SimpleForm extends Form {
     /**
      * @param string $content
      */
-    public function setContent(string $content) : void {
+    public function setContent(string $content): void {
         $this->data["content"] = $content;
     }
 
@@ -62,7 +62,7 @@ class SimpleForm extends Form {
      * @param string $imagePath
      * @param string $label
      */
-    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
+    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null): void {
         $content = ["text" => $text];
         if($imageType !== -1) {
             $content["image"]["type"] = $imageType === 0 ? "path" : "url";

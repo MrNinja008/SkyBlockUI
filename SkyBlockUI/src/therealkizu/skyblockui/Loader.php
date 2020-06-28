@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace therealkizu\skyblockui;
 
 use pocketmine\plugin\PluginBase;
+
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
 use therealkizu\skyblockui\functions\Functions;
 use therealkizu\skyblockui\utils\Utils;
@@ -34,22 +35,23 @@ class Loader extends PluginBase {
     /** @var Utils $utils */
     public $utils;
 
-    public function onLoad() {
+    public function onLoad(): void {
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->saveResource("config.yml");
     }
 
-    public function onEnable() {
+    public function onEnable(): void {
         $this->functions = new Functions($this);
         $this->utils = new Utils($this);
 
-        $this->registerCommands();
+        $this->initCommands();
+
         $this->utils->isSpoon();
         $this->utils->checkSkyBlockPlugin();
     }
 
-    public function registerCommands() {
+    public function initCommands(): void {
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);
