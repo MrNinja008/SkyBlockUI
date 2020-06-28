@@ -45,13 +45,12 @@ class Functions {
 
     /**
      * @param Player $player
-     * @param $session
+     * @param Session $session
      */
-    public function sbUI(Player $player, $session) {
+    public function sbUI(Player $player, Session $session) {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if (is_null($result)) return;
-            if (!$session instanceof Session) return;
 
             switch ($result) {
                 case 0:
@@ -92,26 +91,26 @@ class Functions {
 
     /**
      * @param Player $player
-     * @param $session
+     * @param Session $session
      */
-    public function SBIsland(Player $player, $session) {
+    public function SBIsland(Player $player, Session $session) {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result !== null) {
-                switch ($result) {
-                    case 0:
-                        IslandFactory::createIslandFor($session, "Basic");
-                        break;
-                    case 1:
-                        IslandFactory::createIslandFor($session, "Palm");
-                        break;
-                    case 2:
-                        IslandFactory::createIslandFor($session, "");
-                        break;
-                    case 3:
-                        $this->sbUI($player, $session);
-                        break;
-                }
+            if ($result == null) return;
+
+            switch ($result) {
+                case 0:
+                    IslandFactory::createIslandFor($session, "Basic");
+                    break;
+                case 1:
+                    IslandFactory::createIslandFor($session, "Palm");
+                    break;
+                case 2:
+                    IslandFactory::createIslandFor($session, "");
+                    break;
+                case 3:
+                    $this->sbUI($player, $session);
+                    break;
             }
         });
         $form->setTitle("§lISLAND CREATION");
@@ -125,13 +124,12 @@ class Functions {
 
     /**
      * @param Player $player
-     * @param $session
+     * @param Session $session
      */
-    public function SBManage(Player $player, $session) {
+    public function SBManage(Player $player, Session $session) {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result == null) return;
-            if (!$session instanceof Session) return;
 
             switch ($result) {
                 case 0:
@@ -164,11 +162,9 @@ class Functions {
 
     /**
      * @param Player $player
-     * @param $session
+     * @param Session $session
      */
-    public function inviteManage(Player $player, $session) {
-        if (!$session instanceof Session) return;
-
+    public function inviteManage(Player $player, Session $session) {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result == null) return;
@@ -191,8 +187,8 @@ class Functions {
                     break;
             }
         });
-        $form->setTitle("§lMEMBER MANAGEMENT");
-        $form->setContent("§fLast Invitation from: " . (string) $session->getLastInvitation()->getSender());
+        $form->setTitle("§lINVITE MANAGEMENT");
+        $form->setContent("§fManage your invites!");
         $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
