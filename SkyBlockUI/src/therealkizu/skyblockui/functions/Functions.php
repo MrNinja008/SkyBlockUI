@@ -197,9 +197,9 @@ class Functions {
 
     /**
      * @param Player $player
-     * @param $session
+     * @param Session $session
      */
-    public function memberManage(Player $player, $session) {
+    public function memberManage(Player $player, Session $session) {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result !== null) return;
