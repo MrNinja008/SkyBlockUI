@@ -1,8 +1,8 @@
 name: SkyBlockUI
 main: therealkizu\skyblockui\Loader
-version: 1.1.0-beta1
-api: [3.0.0]
-author: TheRealKizu
+version: 1.1.0-beta2
+api:
+  - 3.0.0
 
 depend:
   - SkyBlock
@@ -10,6 +10,6 @@ depend:
 softdepend:
   - RedSkyBlock
 
-#Extra
-website: https://therealkizu.tk
+# Extras
 description: Legit SkyBlockUI! Exclusively for PocketMine-MP!
+author: TheRealKizu
