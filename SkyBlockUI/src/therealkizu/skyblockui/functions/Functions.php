@@ -246,13 +246,10 @@ class Functions {
                     $invitedPlayerSession = SkyBlock::getInstance()->getSessionManager()->getSession($p);
                     $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
                 } else {
-                    $invitedPlayerSession = SkyBlock::getInstance()->getSessionManager()->getSession($p);
-                    $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
+                    $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
+                        "name" => $p->getName()
+                    ]));
                 }
-            } else {
-                $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
-                    "name" => $p->getName()
-                ]));
             }
         });
         $form->setTitle("§lINVITE PLAYER");
