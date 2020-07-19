@@ -35,13 +35,13 @@ class Loader extends PluginBase {
     /** @var Utils $utils */
     public $utils;
 
-    public function onLoad(): void {
+    function onLoad(): void {
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->saveResource("config.yml");
     }
 
-    public function onEnable(): void {
+    function onEnable(): void {
         $this->functions = new Functions($this);
         $this->utils = new Utils($this);
 
@@ -51,7 +51,7 @@ class Loader extends PluginBase {
         $this->utils->checkSkyBlockPlugin();
     }
 
-    public function initCommands(): void {
+    function initCommands(): void {
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);

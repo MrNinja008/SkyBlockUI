@@ -26,6 +26,9 @@ use pocketmine\utils\TextFormat;
 
 use room17\SkyBlock\island\IslandFactory;
 use room17\SkyBlock\session\Session;
+use room17\SkyBlock\session\SessionLocator;
+use room17\SkyBlock\SkyBlock;
+use room17\SkyBlock\utils\Invitation;
 use room17\SkyBlock\utils\message\MessageContainer;
 
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
@@ -35,9 +38,12 @@ use therealkizu\skyblockui\Loader;
 class Functions {
 
     /** @var Loader $plugin */
-    private $plugin;
+    protected $plugin;
 
-    public function __construct(Loader $plugin){
+    /**
+     * @param Loader $plugin
+     */
+    public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
     }
 
@@ -47,10 +53,10 @@ class Functions {
      * @param Player $player
      * @param Session $session
      */
-    public function sbUI(Player $player, Session $session) {
+    public function sbUI(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if (is_null($result)) return;
+            if ($result === null) return;
 
             switch ($result) {
                 case 0:
@@ -93,10 +99,10 @@ class Functions {
      * @param Player $player
      * @param Session $session
      */
-    public function SBIsland(Player $player, Session $session) {
+    public function SBIsland(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result == null) return;
+            if ($result === null) return;
 
             switch ($result) {
                 case 0:
@@ -126,10 +132,10 @@ class Functions {
      * @param Player $player
      * @param Session $session
      */
-    public function SBManage(Player $player, Session $session) {
+    public function SBManage(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result == null) return;
+            if ($result === null) return;
 
             switch ($result) {
                 case 0:
@@ -164,10 +170,10 @@ class Functions {
      * @param Player $player
      * @param Session $session
      */
-    public function inviteManage(Player $player, Session $session) {
+    public function inviteManage(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result == null) return;
+            if ($result === null) return;
 
             switch ($result) {
                 case 0:
@@ -199,18 +205,18 @@ class Functions {
      * @param Player $player
      * @param Session $session
      */
-    public function memberManage(Player $player, Session $session) {
+    public function memberManage(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result !== null) return;
+            if ($result === null) return;
 
             switch ($result) {
                 case 0:
-                    $this->invitePlayer($player);
+                    $this->invitePlayer($player, $session);
                     break;
                 case 1:
-                    //$this->memberBan($player);
-                    $player->sendMessage(TextFormat::RED . "This feature is currently on active development.");
+                    $this->memberBan($player, $session);
+                    //$player->sendMessage(TextFormat::RED . "This feature is currently on active development.");
                     break;
                 case 2:
                     $this->sbUI($player, $session);
@@ -220,38 +226,74 @@ class Functions {
         $form->setTitle("§lMEMBER MANAGEMENT");
         $form->setContent("§fManage your island members!");
         $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Remove Member\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Remove Player\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
 
     /**
      * @param Player $player
+     * @param Session $session
      */
-    public function invitePlayer(Player $player) {
-        $form = new CustomForm(function (Player $player, $data){
+    public function invitePlayer(Player $player, Session $session): void {
+        $form = new CustomForm(function ($data) use ($session) {
             $result = $data[0];
-            if ($result !== null) {
-                $this->plugin->getServer()->dispatchCommand($player, "is invite" . $result);
+            if ($result === null) return;
+
+            $p = $this->plugin->getServer()->getPlayer((string) $result);
+            if ($p !== null) {
+                if ($p instanceof Player) {
+                    $invitedPlayerSession = SkyBlock::getInstance()->getSessionManager()->getSession($p);
+                    $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
+                } else {
+                    $invitedPlayerSession = SkyBlock::getInstance()->getSessionManager()->getSession($p);
+                    $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
+                }
+            } else {
+                $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
+                    "name" => $p->getName()
+                ]));
             }
         });
-        $form->setTitle("§lADD MEMBER");
-        $form->addLabel("Please write the IGN on the box.");
+        $form->setTitle("§lINVITE PLAYER");
+        $form->addLabel("Please write the IGN on the input box below");
         $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
     }
 
     /**
      * @param Player $player
+     * @param Session $session
      */
-    public function memberBan(Player $player) {
-        $form = new CustomForm(function (Player $player, $data){
+    public function memberBan(Player $player, Session $session): void {
+        $form = new CustomForm(function ($data) use ($session) {
             $result = $data[0];
-            if ($result !== null) {
-                $this->plugin->getServer()->dispatchCommand($player, "is banish" . $result);
+            if ($result === null) return;
+
+            $p = $this->plugin->getServer()->getPlayer((string) $result);
+            if ($p instanceof Player) {
+                $playerSession = SessionLocator::getSession($p);
+                if ($playerSession->getIsland() === $session->getIsland()) {
+                    $session->sendTranslatedMessage(new MessageContainer("CANNOT_BANISH_A_MEMBER"));
+                } elseif (in_array($p, $session->getIsland()->getPlayersOnline())) {
+                    $p->teleport($this->plugin->getServer()->getDefaultLevel()->getSpawnLocation());
+                    $playerSession->sendTranslatedMessage(new MessageContainer("BANISHED_FROM_THE_ISLAND"));
+                    $session->sendTranslatedMessage(new MessageContainer("YOU_BANISHED_A_PLAYER", [
+                        "name" => $playerSession->getName()
+                    ]));
+                } else {
+                    $session->sendTranslatedMessage(new MessageContainer("NOT_A_VISITOR", [
+                        "name" => $playerSession->getName()
+                    ]));
+                }
+            } else {
+                $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
+                    "name" => (string) $result
+                ]));
             }
         });
-        $form->addLabel("Please write the IGN on the box.");
+        $form->setTitle("§lREMOVE PLAYER");
+        $form->addLabel("Please write the IGN on the input box below");
         $form->addInput("Player Name:", "TheRealKizu");
         $player->sendForm($form);
     }
@@ -261,7 +303,7 @@ class Functions {
     /**
      * @param Player $player
      */
-    public function rsbUI(Player $player) {
+    public function rsbUI(Player $player): void {
         $form = new SimpleForm(function (Player $player, $data){
             $result = $data;
             if ($result !== null) return;

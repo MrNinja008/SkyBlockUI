@@ -36,6 +36,9 @@ class SkyBlockUICommand extends PluginCommand {
     /** @var Loader $plugin */
     private $plugin;
 
+    /**
+     * @param Loader $plugin
+     */
     public function __construct(Loader $plugin) {
         parent::__construct("skyblockui", $plugin);
         $this->plugin = $plugin;

@@ -26,8 +26,11 @@ use therealkizu\skyblockui\Loader;
 class Utils {
 
     /** @var Loader $plugin */
-    private $plugin;
+    protected $plugin;
 
+    /**
+     * @param Loader $plugin
+     */
     public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
     }
