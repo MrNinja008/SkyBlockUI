@@ -60,7 +60,7 @@ class Utils {
         $sbPlug = $this->plugin->getPluginConfig()->get("skyblock-plugin");
         if ($sbPlug === "giantquartz") {
             $this->plugin->forms = new SkyBlock($this->plugin);
-        } else if ($sbPlug === "redskyblockgh") {
+        } else if ($sbPlug === "redcraftgh") {
             $this->plugin->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }

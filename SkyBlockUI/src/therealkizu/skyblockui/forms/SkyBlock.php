@@ -240,11 +240,11 @@ class SkyBlock {
                 if ($p instanceof Player) {
                     $invitedPlayerSession = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($p);
                     $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
-                } else {
-                    $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
-                        "name" => $p->getName()
-                    ]));
                 }
+            } else {
+                $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
+                    "name" => $p->getName()
+                ]));
             }
         });
         $form->setTitle("§lINVITE PLAYER");
