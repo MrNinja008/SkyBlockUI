@@ -21,9 +21,8 @@
 
 <!--- DEPENDENCIES --->
 ## ⇁ Dependencies
-* [FormAPI](https://poggit.pmmp.io/p/FormAPI) by [jojoe77777](https://github.com/jojoe77777) (Merged as of July 10, 2019)
 * [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) by [GiantQuartz](https://github.com/GiantQuartz)
-* [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) by [RedCraftGH](https://github.com/RedCraftGH) (Check [redsb](https://github.com/TheRealKizu/SkyBlockUI/tree/redsb) branch to see development)
+* [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) by [RedCraftGH](https://github.com/RedCraftGH) (Currently in development.)
 
 <!-- CREDIT -->
 ## ⇁ Credits
