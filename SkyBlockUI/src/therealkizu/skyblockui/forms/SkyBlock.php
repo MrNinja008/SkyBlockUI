@@ -19,23 +19,20 @@
 
 declare(strict_types=1);
 
-namespace therealkizu\skyblockui\functions;
+namespace therealkizu\skyblockui\forms;
 
 use pocketmine\Player;
-use pocketmine\utils\TextFormat;
 
 use room17\SkyBlock\island\IslandFactory;
 use room17\SkyBlock\session\Session;
 use room17\SkyBlock\session\SessionLocator;
-use room17\SkyBlock\SkyBlock;
 use room17\SkyBlock\utils\Invitation;
 use room17\SkyBlock\utils\message\MessageContainer;
-
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
 use therealkizu\skyblockui\Loader;
 
-class Functions {
+class SkyBlock {
 
     /** @var Loader $plugin */
     protected $plugin;
@@ -46,8 +43,6 @@ class Functions {
     public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
     }
-
-    // ---------- [SKYBLOCK] ----------
 
     /**
      * @param Player $player
@@ -243,7 +238,7 @@ class Functions {
             $p = $this->plugin->getServer()->getPlayer((string) $result);
             if ($p !== null) {
                 if ($p instanceof Player) {
-                    $invitedPlayerSession = SkyBlock::getInstance()->getSessionManager()->getSession($p);
+                    $invitedPlayerSession = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($p);
                     $session->sendInvitation(new Invitation($session, $invitedPlayerSession));
                 } else {
                     $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
@@ -295,28 +290,4 @@ class Functions {
         $player->sendForm($form);
     }
 
-    // ---------- [REDSKYBLOCK] ----------
-
-    /**
-     * @param Player $player
-     */
-    public function rsbUI(Player $player): void {
-        $form = new SimpleForm(function (Player $player, $data){
-            $result = $data;
-            if ($result !== null) return;
-
-            switch ($result) {
-                case 0:
-                    $player->sendMessage(TextFormat::RED . "Feature coming soon!");
-                    break;
-                case 1:
-                    break;
-            }
-        });
-        $form->setTitle("§lSKYBLOCK UI");
-        $form->setContent("§fSelect an option!");
-        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§cExit", 0, "textures/blocks/barrier");
-        $player->sendForm($form);
-    }
 }

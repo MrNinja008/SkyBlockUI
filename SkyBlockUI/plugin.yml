@@ -1,8 +1,7 @@
 name: SkyBlockUI
 main: therealkizu\skyblockui\Loader
-version: 1.1.0-beta2
-api:
-  - 3.0.0
+version: 1.1.0-beta3
+api: 3.0.0
 
 depend:
   - SkyBlock
@@ -11,5 +10,11 @@ softdepend:
   - RedSkyBlock
 
 # Extras
-description: Legit SkyBlockUI! Exclusively for PocketMine-MP!
+description: Manage your skyblock island in UI!
 author: TheRealKizu
+
+# Permissions
+permissions:
+  sbui.command:
+    description: Permission for the command /sbui
+    default: true

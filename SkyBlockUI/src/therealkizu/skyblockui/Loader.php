@@ -23,14 +23,19 @@ namespace therealkizu\skyblockui;
 
 use pocketmine\plugin\PluginBase;
 
+use pocketmine\utils\Config;
+
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
-use therealkizu\skyblockui\functions\Functions;
+use therealkizu\skyblockui\forms\SkyBlock;
 use therealkizu\skyblockui\utils\Utils;
 
 class Loader extends PluginBase {
 
-    /** @var Functions $functions */
-    public $functions;
+    /** @var Config $cfg */
+    private $cfg;
+
+    /** @var SkyBlock|null $forms */
+    public $forms;
 
     /** @var Utils $utils */
     public $utils;
@@ -42,11 +47,12 @@ class Loader extends PluginBase {
     }
 
     function onEnable(): void {
-        $this->functions = new Functions($this);
-        $this->utils = new Utils($this);
-
         $this->initCommands();
 
+        $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        $this->forms = null;
+
+        $this->utils = new Utils($this);
         $this->utils->isSpoon();
         $this->utils->checkSkyBlockPlugin();
     }
@@ -55,6 +61,14 @@ class Loader extends PluginBase {
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);
+    }
+
+    function getPluginConfig(): Config {
+        return $this->cfg;
+    }
+
+    function getForms() {
+        return $this->forms;
     }
 
 }

@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\utils;
 
+use therealkizu\skyblockui\forms\SkyBlock;
 use therealkizu\skyblockui\Loader;
 
 class Utils {
@@ -36,7 +37,7 @@ class Utils {
     }
 
     /**
-     * Check if server is not using PocketMine-MP.
+     * Checks whether the server is using PocketMine-MP or not.
      *
      * @return bool
      */
@@ -51,15 +52,17 @@ class Utils {
     }
 
     /**
-     * Check what SkyBlock plugin is the server using.
+     * Checks what SkyBlock plugin is the server using.
      *
      * @return void
      */
     public function checkSkyBlockPlugin(): void {
-        if ($this->plugin->getConfig()->get("is-redskyblock") === "true") {
-            $this->plugin->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
-        } else if ($this->plugin->getConfig()->get("is-redskyblock") === "false") {
-            $this->plugin->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
+        $sbPlug = $this->plugin->getPluginConfig()->get("skyblock-plugin");
+        if ($sbPlug === "giantquartz") {
+            $this->plugin->forms = new SkyBlock($this->plugin);
+        } else if ($sbPlug === "redskyblockgh") {
+            $this->plugin->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
     }
 

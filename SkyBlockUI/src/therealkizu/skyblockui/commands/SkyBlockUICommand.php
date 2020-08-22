@@ -24,11 +24,9 @@ namespace therealkizu\skyblockui\commands;
 use pocketmine\Player;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 
 use room17\SkyBlock\SkyBlock;
-
 use therealkizu\skyblockui\Loader;
 
 class SkyBlockUICommand extends PluginCommand {
@@ -42,7 +40,7 @@ class SkyBlockUICommand extends PluginCommand {
     public function __construct(Loader $plugin) {
         parent::__construct("skyblockui", $plugin);
         $this->plugin = $plugin;
-        $this->setDescription("Manage your island using an UI!");
+        $this->setDescription("Manage your skyblock island in UI!");
         $this->setAliases(["sbui", "islandui", "isui"]);
     }
 
@@ -53,23 +51,19 @@ class SkyBlockUICommand extends PluginCommand {
      * @return bool
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
-        if (!$this->testPermission($sender)) {
-            return true;
-        }
+        if ($sender->hasPermission("sbui.command")) {
+            if ($sender instanceof Player) {
+                $session = SkyBlock::getInstance()->getSessionManager()->getSession($sender);
 
-        if ($sender instanceof Player) {
-            $cfg = new Config($this->plugin->getDataFolder() . "config.yml", Config::YAML);
-
-            $session = SkyBlock::getInstance()->getSessionManager()->getSession($sender);
-            if ($cfg->get("is-redskyblock") === "false") {
-                $this->plugin->functions->sbUI($sender, $session);
-            } else if ($cfg->get("is-redskyblock") === "true"){
-                $this->plugin->functions->rsbUI($sender);
+                $this->plugin->getForms()->sbUI($sender, $session);
+            } else {
+                $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
+                return false;
             }
         } else {
-            $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
+            $sender->sendMessage(TextFormat::RED . "You don't have permission to use this command!");
         }
-        return true;
+        return false;
     }
 
 }
