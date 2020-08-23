@@ -85,7 +85,7 @@ class SkyBlock {
         $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/items/written_book");
+        $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/ui/how_to_play_button_default_light");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }

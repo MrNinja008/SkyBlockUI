@@ -32,13 +32,13 @@ use therealkizu\skyblockui\utils\Utils;
 class Loader extends PluginBase {
 
     /** @var Config $cfg */
-    private $cfg;
+    protected $cfg;
 
-    /** @var SkyBlock|null $forms */
-    public $forms;
+    /** @var SkyBlock $forms */
+    protected $forms;
 
     /** @var Utils $utils */
-    public $utils;
+    protected $utils;
 
     function onLoad(): void {
         @mkdir($this->getDataFolder());
@@ -50,21 +50,26 @@ class Loader extends PluginBase {
         $this->initCommands();
 
         $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-        $this->forms = null;
+        $sbPlug = $this->cfg->get("skyblock-plugin");
+        switch ($sbPlug) {
+            case "redcraftgh":
+                $this->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+                break;
+            case "giantquartz":
+            default:
+                $this->forms = new SkyBlock($this);
+                break;
+        }
 
         $this->utils = new Utils($this);
         $this->utils->isSpoon();
-        $this->utils->checkSkyBlockPlugin();
     }
 
     function initCommands(): void {
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);
-    }
-
-    function getPluginConfig(): Config {
-        return $this->cfg;
     }
 
     function getForms() {

@@ -21,13 +21,12 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\utils;
 
-use therealkizu\skyblockui\forms\SkyBlock;
 use therealkizu\skyblockui\Loader;
 
 class Utils {
 
     /** @var Loader $plugin */
-    protected $plugin;
+    public $plugin;
 
     /**
      * @param Loader $plugin
@@ -49,21 +48,6 @@ class Utils {
         }
 
         return false;
-    }
-
-    /**
-     * Checks what SkyBlock plugin is the server using.
-     *
-     * @return void
-     */
-    public function checkSkyBlockPlugin(): void {
-        $sbPlug = $this->plugin->getPluginConfig()->get("skyblock-plugin");
-        if ($sbPlug === "giantquartz") {
-            $this->plugin->forms = new SkyBlock($this->plugin);
-        } else if ($sbPlug === "redcraftgh") {
-            $this->plugin->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
-            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
-        }
     }
 
 }
