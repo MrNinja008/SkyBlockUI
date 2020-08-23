@@ -147,7 +147,7 @@ class SkyBlock {
                     $session->sendTranslatedMessage(new MessageContainer($island->isLocked() ? "ISLAND_LOCKED" : "ISLAND_UNLOCKED"));
                     break;
                 case 3:
-                    $this->sbUI($player, $session);
+                    $this->sbUI($player, $session);  
                     break;
             }
 
