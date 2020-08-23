@@ -156,7 +156,11 @@ class SkyBlock {
         $form->setContent("§fManage your island!");
         $form->addButton("§8Join Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        if (!$session->getIsland()->isLocked()) {
+            $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        } else {
+            $form->addButton("§8Unlock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        }
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
@@ -211,7 +215,6 @@ class SkyBlock {
                     break;
                 case 1:
                     $this->memberBan($player, $session);
-                    //$player->sendMessage(TextFormat::RED . "This feature is currently on active development.");
                     break;
                 case 2:
                     $this->sbUI($player, $session);
@@ -243,7 +246,7 @@ class SkyBlock {
                 }
             } else {
                 $session->sendTranslatedMessage(new MessageContainer("NOT_ONLINE_PLAYER", [
-                    "name" => $p->getName()
+                    "name" => $data[0]
                 ]));
             }
         });

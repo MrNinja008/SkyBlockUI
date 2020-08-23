@@ -32,7 +32,7 @@ use therealkizu\skyblockui\Loader;
 class SkyBlockUICommand extends PluginCommand {
 
     /** @var Loader $plugin */
-    private $plugin;
+    protected $plugin;
 
     /**
      * @param Loader $plugin
@@ -42,6 +42,7 @@ class SkyBlockUICommand extends PluginCommand {
         $this->plugin = $plugin;
         $this->setDescription("Manage your skyblock island in UI!");
         $this->setAliases(["sbui", "islandui", "isui"]);
+        $this->setPermission("sbui.command");
     }
 
     /**

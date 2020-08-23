@@ -42,7 +42,7 @@ class Utils {
      */
     public function isSpoon(): bool {
         if ($this->plugin->getServer()->getName() !== "PocketMine-MP") {
-            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP. Disabling plugin...");
+            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP! Disabling plugin...");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
             return true;
         }

@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace therealkizu\skyblockui;
 
 use pocketmine\plugin\PluginBase;
-
 use pocketmine\utils\Config;
 
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
