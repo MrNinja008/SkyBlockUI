@@ -22,10 +22,6 @@
 * [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) by [GiantQuartz](https://github.com/GiantQuartz)
 * [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) by [RedCraftGH](https://github.com/RedCraftGH) (Currently in development.)
 
-<!-- CREDIT -->
-## ⇁ Credits
-* Thanks [@TrackRunny](https://github.com/TrackRunny) for the README design.
-
 <!--- SUPPORT --->
 ## ⇁ Support
 * Email: `therealkizu@protonmail.com`
