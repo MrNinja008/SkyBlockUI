@@ -56,7 +56,7 @@ class SkyBlockUICommand extends PluginCommand {
             if ($sender instanceof Player) {
                 $session = SkyBlock::getInstance()->getSessionManager()->getSession($sender);
 
-                $this->plugin->getForms()->sbUI($sender, $session);
+                $this->plugin->getForms()->mainUI($sender, $session);
             } else {
                 $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
                 return false;

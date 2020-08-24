@@ -23,14 +23,15 @@ namespace therealkizu\skyblockui\forms;
 
 use pocketmine\Player;
 
+use room17\SkyBlock\command\IslandCommandMap;
 use room17\SkyBlock\island\IslandFactory;
 use room17\SkyBlock\session\Session;
 use room17\SkyBlock\session\SessionLocator;
 use room17\SkyBlock\utils\Invitation;
 use room17\SkyBlock\utils\message\MessageContainer;
+use therealkizu\skyblockui\Loader;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
-use therealkizu\skyblockui\Loader;
 
 class SkyBlock {
 
@@ -48,7 +49,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function sbUI(Player $player, Session $session): void {
+    public function mainUI(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result === null) return;
@@ -56,26 +57,44 @@ class SkyBlock {
             switch ($result) {
                 case 0:
                     if (!$session->hasIsland()) {
-                        $this->SBIsland($player, $session);
+                        $this->islandCreation($player, $session);
                     } else {
                         $session->sendTranslatedMessage(new MessageContainer("NEED_TO_BE_FREE"));
                     }
                     break;
                 case 1:
                     if ($session->hasIsland()) {
-                        $this->SBManage($player, $session);
+                        $this->islandManagement($player, $session);
                     } else {
                         $session->sendTranslatedMessage(new MessageContainer("NEED_ISLAND"));
                     }
                     break;
                 case 2:
-                    $this->inviteManage($player, $session);
+                    $this->inviteManagement($player, $session);
                     break;
                 case 3:
-                    $this->memberManage($player, $session);
+                    $this->memberManagement($player, $session);
                     break;
                 case 4:
                     $player->getServer()->dispatchCommand($player, "is help");
+                    /*
+                    $skyBlock = $this->plugin->getServer()->getPluginManager()->getPlugin("SkyBlock");
+                    if (!$skyBlock instanceof \room17\SkyBlock\SkyBlock)
+                        return;
+
+                    $map = new IslandCommandMap($skyBlock);
+                    $session->sendTranslatedMessage(new MessageContainer("HELP_HEADER", [
+                        "amount" => count($map->getCommands())
+                    ]));
+
+                    foreach ($map->getCommands() as $command) {
+                        $session->sendTranslatedMessage(new MessageContainer("HELP_COMMAND_TEMPLATE", [
+                            "name" => $command->getName(),
+                            "description" => $session->getMessage($command->getDescriptionMessageContainer()),
+                            "usage" => $session->getMessage($command->getUsageMessageContainer())
+                        ]));
+                    }
+                    */
                     break;
             }
         });
@@ -94,7 +113,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function SBIsland(Player $player, Session $session): void {
+    public function islandCreation(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result === null) return;
@@ -102,15 +121,18 @@ class SkyBlock {
             switch ($result) {
                 case 0:
                     IslandFactory::createIslandFor($session, "Basic");
+                    $session->sendTranslatedMessage(new MessageContainer("SUCCESSFULLY_CREATED_A_ISLAND"));
                     break;
                 case 1:
                     IslandFactory::createIslandFor($session, "Palm");
+                    $session->sendTranslatedMessage(new MessageContainer("SUCCESSFULLY_CREATED_A_ISLAND"));
                     break;
                 case 2:
                     IslandFactory::createIslandFor($session, "");
+                    $session->sendTranslatedMessage(new MessageContainer("SUCCESSFULLY_CREATED_A_ISLAND"));
                     break;
                 case 3:
-                    $this->sbUI($player, $session);
+                    $this->mainUI($player, $session);
                     break;
             }
         });
@@ -127,7 +149,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function SBManage(Player $player, Session $session): void {
+    public function islandManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result === null) return;
@@ -147,7 +169,7 @@ class SkyBlock {
                     $session->sendTranslatedMessage(new MessageContainer($island->isLocked() ? "ISLAND_LOCKED" : "ISLAND_UNLOCKED"));
                     break;
                 case 3:
-                    $this->sbUI($player, $session);  
+                    $this->mainUI($player, $session);
                     break;
             }
 
@@ -156,10 +178,10 @@ class SkyBlock {
         $form->setContent("§fManage your island!");
         $form->addButton("§8Join Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        if (!$session->getIsland()->isLocked()) {
-            $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        } else {
+        if ($session->getIsland()->isLocked()) {
             $form->addButton("§8Unlock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        } else {
+            $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         }
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
@@ -169,7 +191,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function inviteManage(Player $player, Session $session): void {
+    public function inviteManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result === null) return;
@@ -188,7 +210,7 @@ class SkyBlock {
                     }
                     break;
                 case 2:
-                    $this->sbUI($player, $session);
+                    $this->mainUI($player, $session);
                     break;
             }
         });
@@ -204,7 +226,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function memberManage(Player $player, Session $session): void {
+    public function memberManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             if ($result === null) return;
@@ -214,10 +236,10 @@ class SkyBlock {
                     $this->invitePlayer($player, $session);
                     break;
                 case 1:
-                    $this->memberBan($player, $session);
+                    $this->removeMember($player, $session);
                     break;
                 case 2:
-                    $this->sbUI($player, $session);
+                    $this->mainUI($player, $session);
                     break;
             }
         });
@@ -260,7 +282,7 @@ class SkyBlock {
      * @param Player $player
      * @param Session $session
      */
-    public function memberBan(Player $player, Session $session): void {
+    public function removeMember(Player $player, Session $session): void {
         $form = new CustomForm(function ($data) use ($session) {
             $result = $data[0];
             if ($result === null) return;

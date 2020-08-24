@@ -6,12 +6,10 @@
 
 <!--- FEATURES --->
 ## ⇁ Features
-* [x] Simple UI!
-* [x] Island Creation
-* [x] Island Management
-* [x] Member Management
-* [x] [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) and [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) Support
-
+* Simple Interface
+* Island Creation and Management
+* Invite Manager
+* Member Manager
 
 <!--- INSTALLATION --->
 ## ⇁ Installation
