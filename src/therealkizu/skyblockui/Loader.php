@@ -25,6 +25,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
+use therealkizu\skyblockui\forms\RedSkyBlock;
 use therealkizu\skyblockui\forms\SkyBlock;
 use therealkizu\skyblockui\utils\Utils;
 
@@ -33,7 +34,7 @@ class Loader extends PluginBase {
     /** @var Config $cfg */
     protected $cfg;
 
-    /** @var SkyBlock $forms */
+    /** @var SkyBlock|RedSkyBlock $forms */
     protected $forms;
 
     /** @var Utils $utils */
@@ -54,6 +55,7 @@ class Loader extends PluginBase {
             case "redcraftgh":
                 $this->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
                 $this->getServer()->getPluginManager()->disablePlugin($this);
+                // $this->forms = new RedSkyBlock($this);
                 break;
             case "giantquartz":
             default:
@@ -63,6 +65,7 @@ class Loader extends PluginBase {
 
         $this->utils = new Utils($this);
         $this->utils->isSpoon();
+        $this->utils->checkConfig();
     }
 
     function initCommands(): void {
@@ -71,6 +74,16 @@ class Loader extends PluginBase {
         ]);
     }
 
+    /**
+     * @return Config
+     */
+    function getConfig(): Config {
+        return $this->cfg;
+    }
+
+    /**
+     * @return RedSkyBlock|SkyBlock
+     */
     function getForms() {
         return $this->forms;
     }

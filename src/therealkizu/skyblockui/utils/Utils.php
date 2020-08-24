@@ -21,12 +21,17 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\utils;
 
+use ReflectionException;
+
 use therealkizu\skyblockui\Loader;
+use therealkizu\skyblockui\libs\JackMD\ConfigUpdater\ConfigUpdater;
 
 class Utils {
 
     /** @var Loader $plugin */
-    public $plugin;
+    protected $plugin;
+
+    protected const CONFIG_VERSION = 1.0;
 
     /**
      * @param Loader $plugin
@@ -48,6 +53,19 @@ class Utils {
         }
 
         return false;
+    }
+
+    /**
+     * Checks if the plugins config was created before the rewrite
+     *
+     * @return void
+     */
+    public function checkConfig(): void {
+        try {
+            ConfigUpdater::checkUpdate($this->plugin, $this->plugin->getConfig(), "config-version", (int)self::CONFIG_VERSION);
+        } catch (ReflectionException $e) {
+            $this->plugin->getLogger()->error("Error encountered while checking config: " . $e);
+        }
     }
 
 }
