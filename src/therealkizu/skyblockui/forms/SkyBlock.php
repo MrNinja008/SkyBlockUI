@@ -29,6 +29,7 @@ use room17\SkyBlock\session\Session;
 use room17\SkyBlock\session\SessionLocator;
 use room17\SkyBlock\utils\Invitation;
 use room17\SkyBlock\utils\message\MessageContainer;
+use therealkizu\skyblockui\libs\jojoe77777\FormAPI\ModalForm;
 use therealkizu\skyblockui\Loader;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
@@ -190,7 +191,6 @@ class SkyBlock {
     /**
      * @param Player $player
      * @param Session $session
-     * @param Invitation $invitation
      */
     public function inviteManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
