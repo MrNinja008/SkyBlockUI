@@ -190,23 +190,27 @@ class SkyBlock {
     /**
      * @param Player $player
      * @param Session $session
+     * @param Invitation $invitation
      */
     public function inviteManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
+            $invitation = $session->getLastInvitation();
             if ($result === null) return;
 
             switch ($result) {
                 case 0:
-                    $inv = $session->getLastInvitation();
-                    if ($inv != null) {
-                        $inv->accept();
+                    if ($invitation !== null) {
+                        $invitation->accept();
+                    } else {
+                        $session->sendTranslatedMessage(new MessageContainer("ACCEPT_USAGE"));
                     }
                     break;
                 case 1:
-                    $inv = $session->getLastInvitation();
-                    if ($inv != null) {
-                        $inv->deny();
+                    if ($invitation !== null) {
+                        $invitation->deny();
+                    } else {
+                        $session->sendTranslatedMessage(new MessageContainer("DENY_USAGE"));
                     }
                     break;
                 case 2:
