@@ -1,0 +1,11 @@
+# Configuration file for SkyBlockUI
+# Made by TheRealKizu (https://github.com/TheRealKizu)
+
+# WARNING: Do not change the option below! For internal use only.
+config-version: 1.0
+
+# Options:
+# giantquartz - If you want to use the SkyBlock plugin by QiantQuartz.
+# redcraftgh - If you want to use RedSkyBlock by RedCraftGH.
+# WARNING: RedSkyBlock support is currently in development!
+skyblock-plugin: "giantquartz"

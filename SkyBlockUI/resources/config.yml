@@ -1,8 +1,0 @@
-# Configuration file for SkyBlockUI
-# Made by TheRealKizu (https://github.com/TheRealKizu)
-
-# Options:
-# True - If you want to use RedSkyBlock by RedCraftGH.
-# False - If you want to use SkyBlock by GiantQuartz.
-# Note: I don't recommend to enable this feature as it's on development
-is-redskyblock: "false"

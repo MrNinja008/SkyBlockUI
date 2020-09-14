@@ -1,0 +1,20 @@
+name: SkyBlockUI
+main: therealkizu\skyblockui\Loader
+version: 1.1.0-beta6
+api: 3.0.0
+
+depend:
+  - SkyBlock
+
+softdepend:
+  - RedSkyBlock
+
+# Extras
+description: Manage your skyblock island in UI!
+author: TheRealKizu
+
+# Permissions
+permissions:
+  sbui.command:
+    description: Permission for the command /sbui
+    default: true

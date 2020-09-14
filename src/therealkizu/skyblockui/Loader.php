@@ -22,18 +22,23 @@ declare(strict_types=1);
 namespace therealkizu\skyblockui;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 
 use therealkizu\skyblockui\commands\SkyBlockUICommand;
-use therealkizu\skyblockui\functions\Functions;
+use therealkizu\skyblockui\forms\RedSkyBlock;
+use therealkizu\skyblockui\forms\SkyBlock;
 use therealkizu\skyblockui\utils\Utils;
 
 class Loader extends PluginBase {
 
-    /** @var Functions $functions */
-    public $functions;
+    /** @var Config $cfg */
+    protected $cfg;
+
+    /** @var SkyBlock|RedSkyBlock $forms */
+    protected $forms;
 
     /** @var Utils $utils */
-    public $utils;
+    protected $utils;
 
     function onLoad(): void {
         @mkdir($this->getDataFolder());
@@ -42,19 +47,46 @@ class Loader extends PluginBase {
     }
 
     function onEnable(): void {
-        $this->functions = new Functions($this);
-        $this->utils = new Utils($this);
-
         $this->initCommands();
 
+        $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        $sbPlug = $this->cfg->get("skyblock-plugin");
+        switch ($sbPlug) {
+            case "redcraftgh":
+                $this->getLogger()->error("RedSkyBlock support is currently on development! Disabling plugin...");
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+                // $this->forms = new RedSkyBlock($this);
+                break;
+            case "giantquartz":
+            default:
+                $this->forms = new SkyBlock($this);
+                break;
+        }
+
+        $this->utils = new Utils($this);
         $this->utils->isSpoon();
-        $this->utils->checkSkyBlockPlugin();
+        $this->utils->checkConfig();
+        $this->utils->checkAuthor();
     }
 
     function initCommands(): void {
         $this->getServer()->getCommandMap()->registerAll("SkyBlockUI", [
             new SkyBlockUICommand($this),
         ]);
+    }
+
+    /**
+     * @return Config
+     */
+    function getConfig(): Config {
+        return $this->cfg;
+    }
+
+    /**
+     * @return RedSkyBlock|SkyBlock
+     */
+    function getForms() {
+        return $this->forms;
     }
 
 }

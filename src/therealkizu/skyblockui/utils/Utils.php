@@ -21,12 +21,17 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\utils;
 
+use ReflectionException;
+
 use therealkizu\skyblockui\Loader;
+use therealkizu\skyblockui\libs\JackMD\ConfigUpdater\ConfigUpdater;
 
 class Utils {
 
     /** @var Loader $plugin */
     protected $plugin;
+
+    protected const CONFIG_VERSION = 1.0;
 
     /**
      * @param Loader $plugin
@@ -36,13 +41,13 @@ class Utils {
     }
 
     /**
-     * Check if server is not using PocketMine-MP.
+     * Checks whether the server is using PocketMine-MP or not.
      *
      * @return bool
      */
     public function isSpoon(): bool {
         if ($this->plugin->getServer()->getName() !== "PocketMine-MP") {
-            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP. Disabling plugin...");
+            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP! Disabling plugin...");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
             return true;
         }
@@ -51,15 +56,27 @@ class Utils {
     }
 
     /**
-     * Check what SkyBlock plugin is the server using.
+     * Checks if the plugins config was created before the rewrite
      *
      * @return void
      */
-    public function checkSkyBlockPlugin(): void {
-        if ($this->plugin->getConfig()->get("is-redskyblock") === "true") {
-            $this->plugin->getLogger()->notice("RedSkyBlock function is enabled! Disabling support for SkyBlock by GiantQuartz.");
-        } else if ($this->plugin->getConfig()->get("is-redskyblock") === "false") {
-            $this->plugin->getLogger()->notice("SkyBlock function is enabled! Disabling support for RedSkyBlock by RedCraftGH.");
+    public function checkConfig(): void {
+        try {
+            ConfigUpdater::checkUpdate($this->plugin, $this->plugin->getConfig(), "config-version", (int)self::CONFIG_VERSION);
+        } catch (ReflectionException $e) {
+            $this->plugin->getLogger()->error("Error encountered while checking config: " . $e);
+        }
+    }
+
+    /**
+     * DO NOT EDIT!
+     *
+     * @return void
+     */
+    public function checkAuthor(): void {
+        if ($this->plugin->getDescription()->getAuthors() !== ["TheRealKizu"]) {
+            $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases. Disabling plugin...");
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
     }
 
