@@ -22,14 +22,13 @@ declare(strict_types=1);
 namespace therealkizu\skyblockui\forms;
 
 use pocketmine\Player;
+use pocketmine\utils\TextFormat as C;
 
-use room17\SkyBlock\command\IslandCommandMap;
 use room17\SkyBlock\island\IslandFactory;
 use room17\SkyBlock\session\Session;
 use room17\SkyBlock\session\SessionLocator;
 use room17\SkyBlock\utils\Invitation;
 use room17\SkyBlock\utils\message\MessageContainer;
-use therealkizu\skyblockui\libs\jojoe77777\FormAPI\ModalForm;
 use therealkizu\skyblockui\Loader;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\CustomForm;
 use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
@@ -53,7 +52,8 @@ class SkyBlock {
     public function mainUI(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             switch ($result) {
                 case 0:
@@ -77,25 +77,26 @@ class SkyBlock {
                     $this->memberManagement($player, $session);
                     break;
                 case 4:
-                    $player->getServer()->dispatchCommand($player, "is help");
-                    /*
                     $skyBlock = $this->plugin->getServer()->getPluginManager()->getPlugin("SkyBlock");
                     if (!$skyBlock instanceof \room17\SkyBlock\SkyBlock)
                         return;
 
-                    $map = new IslandCommandMap($skyBlock);
-                    $session->sendTranslatedMessage(new MessageContainer("HELP_HEADER", [
-                        "amount" => count($map->getCommands())
-                    ]));
+                    $helpForm = new SimpleForm(function ($data) {
+                        $result = $data;
+                        if ($result === null)
+                            return;
 
-                    foreach ($map->getCommands() as $command) {
-                        $session->sendTranslatedMessage(new MessageContainer("HELP_COMMAND_TEMPLATE", [
-                            "name" => $command->getName(),
-                            "description" => $session->getMessage($command->getDescriptionMessageContainer()),
-                            "usage" => $session->getMessage($command->getUsageMessageContainer())
-                        ]));
+                    });
+                    $content = " ";
+                    $cmdMap = $skyBlock->getCommandMap();
+                    foreach ($cmdMap->getCommands() as $command) {
+                        $content .= C::GREEN . "/is " . $command->getName() . ": " . C::WHITE . $session->getMessage($command->getDescriptionMessageContainer()) . "\n";
                     }
-                    */
+
+                    $helpForm->setTitle("§lHELP");
+                    $helpForm->setContent("Commands loaded: " . C::GREEN . count($cmdMap->getCommands()) . "\n" . C::RESET . $content);
+                    $helpForm->addButton("§cExit", 0, "textures/blocks/barrier");
+                    $player->sendForm($helpForm);
                     break;
             }
         });
@@ -117,7 +118,8 @@ class SkyBlock {
     public function islandCreation(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             switch ($result) {
                 case 0:
@@ -153,7 +155,8 @@ class SkyBlock {
     public function islandManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             switch ($result) {
                 case 0:
@@ -196,7 +199,8 @@ class SkyBlock {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
             $invitation = $session->getLastInvitation();
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             switch ($result) {
                 case 0:
@@ -233,7 +237,8 @@ class SkyBlock {
     public function memberManagement(Player $player, Session $session): void {
         $form = new SimpleForm(function (Player $player, $data) use ($session) {
             $result = $data;
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             switch ($result) {
                 case 0:
@@ -262,7 +267,8 @@ class SkyBlock {
     public function invitePlayer(Player $player, Session $session): void {
         $form = new CustomForm(function ($data) use ($session) {
             $result = $data[0];
-            if ($result === null) return;
+            if ($result === null)
+                return;
 
             $p = $this->plugin->getServer()->getPlayer((string) $result);
             if ($p !== null) {

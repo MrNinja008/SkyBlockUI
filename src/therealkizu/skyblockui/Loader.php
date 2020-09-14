@@ -66,6 +66,7 @@ class Loader extends PluginBase {
         $this->utils = new Utils($this);
         $this->utils->isSpoon();
         $this->utils->checkConfig();
+        $this->utils->checkAuthor();
     }
 
     function initCommands(): void {
