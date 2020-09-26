@@ -1,6 +1,6 @@
 name: SkyBlockUI
 main: therealkizu\skyblockui\Loader
-version: 1.1.0-beta6
+version: 1.1.0-beta7
 api: 3.0.0
 
 depend:
