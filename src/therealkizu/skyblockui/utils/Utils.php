@@ -75,7 +75,7 @@ class Utils {
      */
     public function checkAuthor(): void {
         if ($this->plugin->getDescription()->getAuthors() !== ["TheRealKizu"]) {
-            $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases. Disabling plugin...");
+            $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
     }

@@ -266,7 +266,7 @@ class SkyBlock {
                     }
 
                     $form->setTitle("§lMEMBER LIST");
-                    $form->setContent("Member Count: §a" . count($members) . "\n§r$content");
+                    $form->setContent("Member Count: " . C::GREEN . count($members) . C::RESET . "\n$content");
                     $form->addButton("§cBack", 0, "textures/blocks/barrier");
                     break;
                 case 3:
