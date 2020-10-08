@@ -21,6 +21,9 @@ declare(strict_types=1);
 
 namespace therealkizu\skyblockui\forms;
 
+use pocketmine\Player;
+
+use therealkizu\skyblockui\libs\jojoe77777\FormAPI\SimpleForm;
 use therealkizu\skyblockui\Loader;
 
 class RedSkyBlock {
@@ -33,5 +36,41 @@ class RedSkyBlock {
     }
 
     // TODO: Finish this
+    // Currently Experimantal
+
+    public function mainUI(Player $player) {
+        $form = new SimpleForm(function (Player $player, $data)  {
+            $result = $data;
+            if ($result === null)
+                return;
+
+            switch ($result) {
+                case 0:
+                    $this->islandManagement($player);
+                    break;
+            }
+        });
+        $form->setTitle("§lSKYBLOCK UI");
+        $form->setContent("§fSelect an option!");
+        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $player->sendForm($form);
+    }
+
+    public function islandManagement(Player $player) {
+        $form = new SimpleForm(function ($data)  {
+            $result = $data;
+            if ($result === null)
+                return;
+
+            switch ($result) {
+                case 0:
+                    break;
+            }
+        });
+        $form->setTitle("§lISLAND CREATION");
+        $form->setContent("§fDo you want to create an island?");
+        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $player->sendForm($form);
+    }
 
 }
