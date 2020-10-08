@@ -183,9 +183,9 @@ class SkyBlock {
         $form->addButton("§8Join Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         if ($session->getIsland()->isLocked()) {
-            $form->addButton("§8Unlock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+            $form->addButton("§8Unlock Island\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_unlocked");
         } else {
-            $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+            $form->addButton("§8Lock Island\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_lock");
         }
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
