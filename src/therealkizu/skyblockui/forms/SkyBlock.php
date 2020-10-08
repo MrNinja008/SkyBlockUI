@@ -102,10 +102,10 @@ class SkyBlock {
         });
         $form->setTitle("§lSKYBLOCK UI");
         $form->setContent("§fSelect an option!");
-        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_nature");
+        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_item");
+        $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/invite_base");
+        $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_multiplayer");
         $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/ui/how_to_play_button_default_light");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
@@ -224,8 +224,8 @@ class SkyBlock {
         });
         $form->setTitle("§lINVITE MANAGEMENT");
         $form->setContent("§fManage your invites!");
-        $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 0, "textures/ui/check");
+        $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 0, "textures/ui/cancel");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
     }
