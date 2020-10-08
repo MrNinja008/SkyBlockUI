@@ -52,19 +52,21 @@ class SkyBlockUICommand extends PluginCommand {
      * @return bool
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
-        if ($sender->hasPermission("sbui.command")) {
-            if ($sender instanceof Player) {
-                if ($this->plugin->getForms() instanceof SkyBlock) {
-                    $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
+        if (!$sender instanceof Player) {
+            $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
+            return false;
+        }
 
-                    $this->plugin->getForms()->mainUI($sender, $session);
-                }
-            } else {
-                $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
-                return false;
+        if ($sender->hasPermission("sbui.command")) {
+            if ($this->plugin->getForms() instanceof SkyBlock) {
+                $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
+
+                $this->plugin->getForms()->mainUI($sender, $session);
+                return true;
             }
         } else {
             $sender->sendMessage(TextFormat::RED . "You don't have permission to use this command!");
+            return false;
         }
         return false;
     }
