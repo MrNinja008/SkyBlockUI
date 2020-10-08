@@ -31,6 +31,7 @@ class Utils {
     /** @var Loader $plugin */
     protected $plugin;
 
+    /** @var float */
     protected const CONFIG_VERSION = 1.0;
 
     /**
@@ -56,7 +57,7 @@ class Utils {
     }
 
     /**
-     * Checks if the plugins config was created before the rewrite
+     * Checks if the plugin's config was created before the rewrite.
      *
      * @return void
      */
@@ -70,6 +71,7 @@ class Utils {
 
     /**
      * DO NOT EDIT!
+     * INTERNAL USE ONLY
      *
      * @return void
      */
