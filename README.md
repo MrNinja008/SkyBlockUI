@@ -24,13 +24,13 @@
 ## ⇁ Installation
 
    * Download the latest **stable release**. Releases can be found at [GitHub Releases](https://github.com/TheRealKizu/SkyBlockUI/releases) or on [Poggit](https://poggit.pmmp.io/p/SkyBlockUI/).
-   * Place it on your `plugins` folder.
-   * Restart the server. 
+   * Place it on your server directory's `plugins` folder.
+   * Stop an current instance of the server and start it.
 
 <!--- DEPENDENCIES --->
 ## ⇁ Dependencies
 
-   * [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) by [GiantQuartz](https://github.com/GiantQuartz)
+   * [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) by [GiantQuartz](https://github.com/andresbytes)
    * [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) by [RedCraftGH](https://github.com/RedCraftGH) (Currently in development.)
 
 <!--- SUPPORT --->
@@ -38,4 +38,5 @@
 
    * Discord Account: `TheRealKizu#3267`
    * Email: `therealkizu@protonmail.com`
+   
    
