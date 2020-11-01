@@ -71,10 +71,14 @@ class SkyBlock {
                     }
                     break;
                 case 2:
-                    $this->inviteManagement($player, $session);
+                    if ($session->hasIsland()) {
+                        $this->memberManagement($player, $session);
+                    } else {
+                        $session->sendTranslatedMessage(new MessageContainer("NEED_ISLAND"));
+                    }
                     break;
                 case 3:
-                    $this->memberManagement($player, $session);
+                    $this->inviteManagement($player, $session);
                     break;
                 case 4:
                     $skyBlock = $this->plugin->getServer()->getPluginManager()->getPlugin("SkyBlock");
@@ -104,8 +108,8 @@ class SkyBlock {
         $form->setContent("§fSelect an option!");
         $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_nature");
         $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_item");
-        $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/invite_base");
         $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_multiplayer");
+        $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/invite_base");
         $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/ui/how_to_play_button_default_light");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
         $player->sendForm($form);
