@@ -34,7 +34,7 @@ class Loader extends PluginBase {
     /** @var Config $cfg */
     protected $cfg;
 
-    /** @var SkyBlock|RedSkyBlock $forms */
+    /** @var RedSkyBlock|SkyBlock $forms */
     protected $forms;
 
     /** @var Utils $utils */

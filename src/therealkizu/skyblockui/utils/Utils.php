@@ -31,6 +31,7 @@ class Utils {
     /** @var Loader $plugin */
     protected $plugin;
 
+    /** @var float */
     protected const CONFIG_VERSION = 1.0;
 
     /**
@@ -56,7 +57,7 @@ class Utils {
     }
 
     /**
-     * Checks if the plugins config was created before the rewrite
+     * Checks if the plugin's config was created before the rewrite.
      *
      * @return void
      */
@@ -70,12 +71,13 @@ class Utils {
 
     /**
      * DO NOT EDIT!
+     * INTERNAL USE ONLY
      *
      * @return void
      */
     public function checkAuthor(): void {
         if ($this->plugin->getDescription()->getAuthors() !== ["TheRealKizu"]) {
-            $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases. Disabling plugin...");
+            $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
     }

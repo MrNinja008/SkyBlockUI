@@ -26,8 +26,8 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\utils\TextFormat;
 
-use room17\SkyBlock\SkyBlock;
 use therealkizu\skyblockui\Loader;
+use therealkizu\skyblockui\forms\SkyBlock;
 
 class SkyBlockUICommand extends PluginCommand {
 
@@ -52,17 +52,21 @@ class SkyBlockUICommand extends PluginCommand {
      * @return bool
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
+        if (!$sender instanceof Player) {
+            $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
+            return false;
+        }
+
         if ($sender->hasPermission("sbui.command")) {
-            if ($sender instanceof Player) {
-                $session = SkyBlock::getInstance()->getSessionManager()->getSession($sender);
+            if ($this->plugin->getForms() instanceof SkyBlock) {
+                $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
 
                 $this->plugin->getForms()->mainUI($sender, $session);
-            } else {
-                $sender->sendMessage(TextFormat::RED . "This command is available in-game only!");
-                return false;
+                return true;
             }
         } else {
             $sender->sendMessage(TextFormat::RED . "You don't have permission to use this command!");
+            return false;
         }
         return false;
     }
