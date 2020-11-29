@@ -59,7 +59,7 @@ class SkyBlockUICommand extends PluginCommand {
 
         if ($sender->hasPermission("sbui.command")) {
             if ($this->plugin->getForms() instanceof SkyBlock) {
-                if (!$args[0] || $args[0] === "") {
+                if (!$args[0]) {
                     $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
 
                     $this->plugin->getForms()->mainUI($sender, $session);

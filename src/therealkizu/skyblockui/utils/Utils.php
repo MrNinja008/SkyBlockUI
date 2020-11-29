@@ -75,7 +75,10 @@ class Utils {
     public function isDeveloperMode(): bool {
         if ($this->plugin->getConfig()->get("isDeveloper") === false) {
             $this->isSpoon();
+            return true;
         }
+
+        return false;
     }
 
     /**
