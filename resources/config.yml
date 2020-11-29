@@ -2,10 +2,18 @@
 # Made by TheRealKizu (https://github.com/TheRealKizu)
 
 # WARNING: Do not change the option below! For internal use only.
-config-version: 1.0
+config-version: 1.1
+
+# Developer Mode! Disables the spoon-check on plugin startup. For internal use only.
+isDeveloper: false
 
 # Options:
 # giantquartz - If you want to use the SkyBlock plugin by QiantQuartz.
 # redcraftgh - If you want to use RedSkyBlock by RedCraftGH.
 # WARNING: RedSkyBlock support is currently in development!
 skyblock-plugin: "giantquartz"
+
+# Detailed Command Arguments
+# Enables '/isui create', etc. shortcuts
+# NOTE: Requires Developer Mode to be on!
+detailedCommand: false

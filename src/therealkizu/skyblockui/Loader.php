@@ -64,7 +64,7 @@ class Loader extends PluginBase {
         }
 
         $this->utils = new Utils($this);
-        $this->utils->isSpoon();
+        $this->utils->isDeveloperMode();
         $this->utils->checkConfig();
         $this->utils->checkAuthor();
     }
