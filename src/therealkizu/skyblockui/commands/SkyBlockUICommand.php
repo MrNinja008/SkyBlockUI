@@ -59,14 +59,19 @@ class SkyBlockUICommand extends PluginCommand {
 
         if ($sender->hasPermission("sbui.command")) {
             if ($this->plugin->getForms() instanceof SkyBlock) {
+                $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
                 if (!$args[0]) {
-                    $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
 
                     $this->plugin->getForms()->mainUI($sender, $session);
                     return true;
                 } else {
                     switch ($args[0]) {
-                        // TODO: Finish this
+                        case "create":
+                            $this->plugin->getForms()->islandCreation($sender, $session);
+                            break;
+                        case "manage":
+                            $this->plugin->getForms()->islandManagement($sender, $session);
+                            break;
                     }
                 }
             }
