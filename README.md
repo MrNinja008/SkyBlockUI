@@ -1,24 +1,28 @@
 <!--- TITLE --->
 # ★ SkyBlockUI
 
+<!--- DESCRIPTION --->
+
+   > Manage your skyblock island using UI!
+    
 <!--- BADGES --->
 
    [![LICENSE](https://img.shields.io/github/license/TheRealKizu/SkyBlockUI.svg?style=flat-square)](https://github.com/TheRealKizu/SkyBlockUI/blob/master/LICENSE)
+   [![MAINTAINED](https://img.shields.io/maintenance/yes/2020?style=flat-square&color=blueviolet)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
    [![Poggit Badge](https://poggit.pmmp.io/shield.dl/SkyBlockUI?style=flat-square)](https://poggit.pmmp.io/p/SkyBlockUI) 
 
 <!--- INFO --->
 ## ⇁ Information
 
-   * Manage your skyblock island using UI!
+   * Written for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP) and spoons
    * Maintained by [@TheRealKizu](https://github.com/TheRealKizu)
 
 <!--- FEATURES --->
 ## ⇁ Features
 
-   * Simple Interface
+   * Simple UI
    * Island Creation and Management
-   * Invite Manager
-   * Member Manager
+   * Island Member Management
 
 <!--- INSTALLATION --->
 ## ⇁ Installation
