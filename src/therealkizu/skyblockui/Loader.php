@@ -2,7 +2,7 @@
 
 /**
 *                  SkyBlockUI
- * Copyright (C) 2019-2020 TheRealKizu
+ * Copyright (C) 2019-2021 TheRealKizu
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ class Loader extends PluginBase {
         }
 
         $this->utils = new Utils($this);
-        $this->utils->isSpoon();
+        $this->utils->isDeveloperMode();
         $this->utils->checkConfig();
         $this->utils->checkAuthor();
     }

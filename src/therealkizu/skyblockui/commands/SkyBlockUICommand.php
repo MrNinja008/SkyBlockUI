@@ -2,7 +2,7 @@
 
 /**
  *                  SkyBlockUI
- * Copyright (C) 2019-2020 TheRealKizu
+ * Copyright (C) 2019-2021 TheRealKizu
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,9 +60,20 @@ class SkyBlockUICommand extends PluginCommand {
         if ($sender->hasPermission("sbui.command")) {
             if ($this->plugin->getForms() instanceof SkyBlock) {
                 $session = \room17\SkyBlock\SkyBlock::getInstance()->getSessionManager()->getSession($sender);
+                if (!$args[0]) {
 
-                $this->plugin->getForms()->mainUI($sender, $session);
-                return true;
+                    $this->plugin->getForms()->mainUI($sender, $session);
+                    return true;
+                } else {
+                    switch ($args[0]) {
+                        case "create":
+                            $this->plugin->getForms()->islandCreation($sender, $session);
+                            break;
+                        case "manage":
+                            $this->plugin->getForms()->islandManagement($sender, $session);
+                            break;
+                    }
+                }
             }
         } else {
             $sender->sendMessage(TextFormat::RED . "You don't have permission to use this command!");

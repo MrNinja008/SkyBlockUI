@@ -2,7 +2,7 @@
 
 /**
  *                  SkyBlockUI
- * Copyright (C) 2019-2020 TheRealKizu
+ * Copyright (C) 2019-2021 TheRealKizu
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,28 +32,13 @@ class Utils {
     protected $plugin;
 
     /** @var float */
-    protected const CONFIG_VERSION = 1.0;
+    protected const CONFIG_VERSION = 1.1;
 
     /**
      * @param Loader $plugin
      */
     public function __construct(Loader $plugin) {
         $this->plugin = $plugin;
-    }
-
-    /**
-     * Checks whether the server is using PocketMine-MP or not.
-     *
-     * @return bool
-     */
-    public function isSpoon(): bool {
-        if ($this->plugin->getServer()->getName() !== "PocketMine-MP") {
-            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP! Disabling plugin...");
-            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -80,6 +65,35 @@ class Utils {
             $this->plugin->getLogger()->error("You are not using the official version of this plugin (SkyBlockUI) by TheRealKizu! Download the official version here: https://github.com/TheRealKizu/SkyBlockUI/releases");
             $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
         }
+    }
+
+    /**
+     * Checks whether the server is using developer mode or not.
+     *
+     * @return bool
+     */
+    public function isDeveloperMode(): bool {
+        if ($this->plugin->getConfig()->get("isDeveloper") === false) {
+            $this->isSpoon();
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks whether the server is using PocketMine-MP or not.
+     *
+     * @return bool
+     */
+    public function isSpoon(): bool {
+        if ($this->plugin->getServer()->getName() !== "PocketMine-MP") {
+            $this->plugin->getLogger()->error("It seems you are not using PocketMine-MP! Disabling plugin...");
+            $this->plugin->getServer()->getPluginManager()->disablePlugin($this->plugin);
+            return true;
+        }
+
+        return false;
     }
 
 }
