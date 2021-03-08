@@ -4,6 +4,8 @@
 <!--- DESCRIPTION --->
 
    > Manage your skyblock island using UI!
+   
+   > Archived as of March 8, 2021.
     
 <!--- BADGES --->
 
@@ -36,6 +38,15 @@
 
    * [SkyBlock](https://poggit.pmmp.io/p/SkyBlock/3.0.0) by [GiantQuartz](https://github.com/andresbytes)
    * [RedSkyBlock](https://poggit.pmmp.io/p/RedSkyBlock/3.1.1) by [RedCraftGH](https://github.com/RedCraftGH) (Currently in development.)
+
+<!--- FAQ --->
+## ⇁ FAQ
+
+   * Why is the plugin archived?
+     - Simple, I don't do PocketMine-MP plugins anymore.
+   
+   * Can we use some code of your plugin on our plugin?
+     - Yes, as long you credit me.
 
 <!--- SUPPORT --->
 ## ⇁ Support
