@@ -104,11 +104,11 @@ class SkyBlock {
                     break;
             }
         });
-        $form->setTitle("§lSKYBLOCK UI");
+        $form->setTitle("§e§lSkyblock Menu");
         $form->setContent("§fSelect an option!");
-        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_nature");
-        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_recipe_item");
-        $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_multiplayer");
+        $form->addButton("§8Island Creation\n§d§l»§r §8Tap to select!", 0, "textures/ui/world_glyph_color_2x");
+        $form->addButton("§8Island Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/settings_glyph_color_2x");
+        $form->addButton("§8Member Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/multiplayer_glyph_color");
         $form->addButton("§8Invite Management\n§d§l»§r §8Tap to select!", 0, "textures/ui/invite_base");
         $form->addButton("§8Help\n§d§l»§r §8Tap to select!", 0, "textures/ui/how_to_play_button_default_light");
         $form->addButton("§cExit", 0, "textures/blocks/barrier");
@@ -135,7 +135,7 @@ class SkyBlock {
                     $session->sendTranslatedMessage(new MessageContainer("SUCCESSFULLY_CREATED_A_ISLAND"));
                     break;
                 case 2:
-                    IslandFactory::createIslandFor($session, "");
+                    IslandFactory::createIslandFor($session, "OP");
                     $session->sendTranslatedMessage(new MessageContainer("SUCCESSFULLY_CREATED_A_ISLAND"));
                     break;
                 case 3:
@@ -182,10 +182,10 @@ class SkyBlock {
             }
 
         });
-        $form->setTitle("§lISLAND MANAGEMENT");
+        $form->setTitle("§l§eISLAND MANAGEMENT");
         $form->setContent("§fManage your island!");
-        $form->addButton("§8Join Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Join Island\n§d§l»§r §8Tap to select!", 0, "textures/ui/realmsIcon");
+        $form->addButton("§8Disband Island\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_trash");
         if ($session->getIsland()->isLocked()) {
             $form->addButton("§8Unlock Island\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_unlocked");
         } else {
@@ -228,7 +228,7 @@ class SkyBlock {
         });
         $form->setTitle("§lINVITE MANAGEMENT");
         $form->setContent("§fManage your invites!");
-        $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 0, "textures/ui/check");
+        $form->addButton("§8Accept Invite\n§d§l»§r §8Tap to select!", 0, "textures/ui/invite_base");
         $form->addButton("§8Deny Invite\n§d§l»§r §8Tap to select!", 0, "textures/ui/cancel");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
@@ -279,10 +279,10 @@ class SkyBlock {
                     break;
             }
         });
-        $form->setTitle("§lMEMBER MANAGEMENT");
+            $form->setTitle("§l§eMEMBER MANAGEMENT");
         $form->setContent("§fManage your island members!");
-        $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
-        $form->addButton("§8Remove Player\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
+        $form->addButton("§8Invite Player\n§d§l»§r §8Tap to select!", 0, "textures/ui/icon_steve");
+        $form->addButton("§8Remove Player\n§d§l»§r §8Tap to select!", 0, "textures/items/dressing_room_skins");
         $form->addButton("§8List Members\n§d§l»§r §8Tap to select!", 0, "textures/items/paper");
         $form->addButton("§cBack", 0, "textures/blocks/barrier");
         $player->sendForm($form);
@@ -312,7 +312,7 @@ class SkyBlock {
         });
         $form->setTitle("§lINVITE PLAYER");
         $form->addLabel("Please write the IGN on the input box below");
-        $form->addInput("Player Name:", "TheRealKizu");
+        $form->addInput("Player Name:", "MrNinja008");
         $player->sendForm($form);
     }
 
@@ -349,7 +349,7 @@ class SkyBlock {
         });
         $form->setTitle("§lREMOVE PLAYER");
         $form->addLabel("Please write the IGN on the input box below");
-        $form->addInput("Player Name:", "TheRealKizu");
+        $form->addInput("Player Name:", "MrNinja008");
         $player->sendForm($form);
     }
 
